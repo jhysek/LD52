@@ -1,0 +1,90 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Assets/BebasKai.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://Scenes/Menu.gd" type="Script" id=2]
+[ext_resource path="res://Assets/light.png" type="Texture" id=3]
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.321569, 0.333333, 0.392157, 1 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 100
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 40
+outline_color = Color( 0.996078, 0.964706, 0.921569, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.454902, 0.509804, 0.560784, 1 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.454902, 0.509804, 0.560784, 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0, 0, 0, 0.529412 )
+
+[node name="Menu" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Panel" type="Panel" parent="."]
+margin_left = -886.0
+margin_top = -516.0
+margin_right = 900.0
+margin_bottom = 506.0
+custom_styles/panel = SubResource( 6 )
+
+[node name="Title" type="Label" parent="."]
+modulate = Color( 0.588235, 0.752941, 0.807843, 1 )
+margin_left = -467.0
+margin_top = -351.0
+margin_right = -176.0
+margin_bottom = -255.0
+custom_fonts/font = SubResource( 1 )
+text = "GAME TITLE"
+
+[node name="Disclaimer" type="Label" parent="."]
+margin_left = 25.0
+margin_top = 330.0
+margin_right = 483.0
+margin_bottom = 354.0
+custom_fonts/font = SubResource( 2 )
+text = "Made in 48h for Ludum Dare Compo by Jiri Hysek"
+align = 2
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[node name="Start" type="Button" parent="."]
+margin_left = -134.0
+margin_top = -33.0
+margin_right = 137.0
+margin_bottom = 36.0
+custom_colors/font_color = Color( 0.996078, 0.964706, 0.921569, 1 )
+custom_fonts/font = SubResource( 3 )
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/normal = SubResource( 5 )
+text = "Start Game"
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( -142, -223 )
+texture = ExtResource( 3 )
+texture_scale = 2.2
+
+[node name="Sfx" type="Node" parent="."]
+
+[node name="Click" type="AudioStreamPlayer" parent="Sfx"]
+
+[connection signal="pressed" from="Start" to="." method="_on_Start_pressed"]
