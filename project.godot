@@ -14,10 +14,6 @@ config/name="LD52"
 run/main_scene="res://Scenes/Menu.tscn"
 config/icon="res://icon.png"
 
-[autoload]
-
-Transition="res://Components/Transition/Transition.tscn"
-
 [display]
 
 window/size/height=760

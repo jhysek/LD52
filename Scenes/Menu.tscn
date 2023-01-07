@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Assets/BebasKai.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scenes/Menu.gd" type="Script" id=2]
 [ext_resource path="res://Assets/light.png" type="Texture" id=3]
+[ext_resource path="res://Assets/gothic_ultra_ot.otf" type="DynamicFontData" id=4]
 
 [sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0.321569, 0.333333, 0.392157, 1 )
@@ -11,7 +12,7 @@ bg_color = Color( 0.321569, 0.333333, 0.392157, 1 )
 size = 100
 use_mipmaps = true
 use_filter = true
-font_data = ExtResource( 1 )
+font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 20
@@ -47,12 +48,12 @@ custom_styles/panel = SubResource( 6 )
 
 [node name="Title" type="Label" parent="."]
 modulate = Color( 0.588235, 0.752941, 0.807843, 1 )
-margin_left = -467.0
-margin_top = -351.0
-margin_right = -176.0
-margin_bottom = -255.0
+margin_left = -408.0
+margin_top = -317.0
+margin_right = 425.0
+margin_bottom = -191.0
 custom_fonts/font = SubResource( 1 )
-text = "GAME TITLE"
+text = "Hungry vampire"
 
 [node name="Disclaimer" type="Label" parent="."]
 margin_left = 25.0

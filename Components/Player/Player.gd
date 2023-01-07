@@ -7,26 +7,49 @@ var direction = Vector2.RIGHT
 var dashing = false
 var dead = false
 
+onready var superhot_style = false
+onready var free_style = false
+
 func _ready():
 	jump_to_map_pos(get_map_pos(), 0.1)
 	set_process_input(true)
+
+func busted():
+	dead = true
+	$DirectionIndicator.hide()
 
 func _input(event):
 	if event is InputEventKey and event.is_action_pressed('ui_left'):
 		direction = Vector2.LEFT
 		$DirectionIndicator.rotation_degrees = -180
+		if game.config.superhot:
+			game.jump()
+		if game.config.freestyle:
+			jump()
 		
 	if event is InputEventKey and event.is_action_pressed('ui_right'):
 		direction = Vector2.RIGHT
 		$DirectionIndicator.rotation_degrees = 0
+		if game.config.superhot:
+			game.jump()
+		if game.config.freestyle:
+			jump()
 		
 	if event is InputEventKey and event.is_action_pressed('ui_up'):
 		direction = Vector2.UP
 		$DirectionIndicator.rotation_degrees = -90
+		if game.config.superhot:
+			game.jump()
+		if game.config.freestyle:
+			jump()
 		
 	if event is InputEventKey and event.is_action_pressed('ui_down'):
 		direction = Vector2.DOWN
 		$DirectionIndicator.rotation_degrees = 90
+		if game.config.superhot:
+			game.jump()
+		if game.config.freestyle:
+			jump()
 		
 	if event is InputEventKey and event.is_action_pressed('ui_accept'):
 		if !dashing:
