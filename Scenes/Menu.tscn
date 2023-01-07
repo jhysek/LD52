@@ -53,7 +53,7 @@ margin_top = -317.0
 margin_right = 425.0
 margin_bottom = -191.0
 custom_fonts/font = SubResource( 1 )
-text = "Hungry vampire"
+text = "Brains"
 
 [node name="Disclaimer" type="Label" parent="."]
 margin_left = 25.0

@@ -1,7 +1,8 @@
 extends Node2D
 
 onready var game = get_node("/root/Game")
-var map_pos
+
+var map_pos = Vector2(0,0)
 var dash_length = 2
 var direction = Vector2.RIGHT
 var dashing = false
@@ -75,9 +76,40 @@ func get_map_pos():
 	
 func jump_to_map_pos(new_map_pos, duration = 0.2):
 	var new_pos = to_world_pos(new_map_pos)
+	if new_map_pos.x < map_pos.x:
+		$Visual.scale.x = -0.5
+	if new_map_pos.x > map_pos.x:
+		$Visual.scale.x = 0.5
+	$AnimationPlayer.play("Jump")
 	$Tween.interpolate_property(self, 'position', position, new_pos, duration, Tween.TRANS_EXPO, Tween.EASE_OUT)
 	$Tween.start()
+
 	map_pos = new_map_pos
+	var human = game.human_at(map_pos)
+	if human:
+		human.zombified()
+	next_safe_direction()
+		
+func next_safe_direction():
+	while !game.is_floor(map_pos + direction): 
+		next_direction()		
+		
+func next_direction():
+	direction = direction.rotated(PI)
+	direction = Vector2(int(direction.x), int(direction.y))
+	rotate_according_direction($DirectionIndicator)
 	
-func to_world_pos(map_pos):
-	return map_pos * game.cell_size + game.cell_size / 2
+func to_world_pos(new_map_pos):
+	return new_map_pos * game.cell_size + game.cell_size / 2
+	
+func rotate_according_direction(obj):
+	match direction:
+		Vector2.RIGHT: obj.rotation_degrees = 0
+		Vector2.LEFT: obj.rotation_degrees = -180
+		Vector2.UP: obj.rotation_degrees = -90
+		Vector2.DOWN: obj.rotation_degrees = 90
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "Jump":
+		$AnimationPlayer.play("Idle")

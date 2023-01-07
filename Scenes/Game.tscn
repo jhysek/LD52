@@ -1,9 +1,16 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scenes/Game.gd" type="Script" id=1]
 [ext_resource path="res://Assets/tilemap.png" type="Texture" id=2]
 [ext_resource path="res://Components/Player/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Components/Enemy/Enemy.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Brains_90.mp3" type="AudioStream" id=5]
+[ext_resource path="res://Assets/Brains_60.mp3" type="AudioStream" id=6]
+[ext_resource path="res://Assets/Brains_120.mp3" type="AudioStream" id=7]
+[ext_resource path="res://Assets/vignette.png" type="Texture" id=8]
+[ext_resource path="res://Components/Powerup/Powerup.tscn" type="PackedScene" id=9]
+
+[sub_resource type="CanvasItemMaterial" id=2]
 
 [sub_resource type="TileSet" id=1]
 0/name = "tilemap.png 0"
@@ -65,9 +72,17 @@
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
+bpm = "60"
+
+[node name="Vignette" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.152941 )
+material = SubResource( 2 )
+position = Vector2( 316, 199 )
+scale = Vector2( 1.29, 1.54 )
+texture = ExtResource( 8 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 256, 216 )
+position = Vector2( 312, 200 )
 current = true
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -76,17 +91,40 @@ cell_size = Vector2( 64, 56 )
 format = 1
 tile_data = PoolIntArray( 0, 2, 0, 1, 1, 0, 2, 2, 0, 3, 1, 0, 4, 2, 0, 5, 1, 0, 6, 2, 0, 7, 1, 0, 8, 2, 0, 9, 1, 0, 65536, 1, 0, 65537, 2, 0, 65538, 1, 0, 65539, 2, 0, 65540, 1, 0, 65541, 2, 0, 65542, 1, 0, 65543, 2, 0, 65544, 1, 0, 65545, 2, 0, 131072, 2, 0, 131073, 1, 0, 131074, 2, 0, 131075, 1, 0, 131076, 2, 0, 131077, 1, 0, 131078, 2, 0, 131079, 1, 0, 131080, 2, 0, 131081, 1, 0, 196608, 1, 0, 196609, 2, 0, 196610, 1, 0, 196611, 2, 0, 196612, 1, 0, 196613, 2, 0, 196614, 1, 0, 196615, 2, 0, 196616, 1, 0, 196617, 2, 0, 262144, 2, 0, 262145, 1, 0, 262146, 2, 0, 262147, 1, 0, 262148, 2, 0, 262149, 1, 0, 262150, 2, 0, 262151, 1, 0, 262152, 2, 0, 262153, 1, 0, 327680, 1, 0, 327681, 2, 0, 327682, 1, 0, 327683, 2, 0, 327684, 1, 0, 327685, 2, 0, 327686, 1, 0, 327687, 2, 0, 327688, 1, 0, 327689, 2, 0, 393216, 2, 0, 393217, 1, 0, 393218, 2, 0, 393219, 1, 0, 393220, 2, 0, 393221, 1, 0, 393222, 2, 0, 393223, 1, 0, 393224, 2, 0, 393225, 1, 0 )
 
-[node name="Enemies" type="Node2D" parent="."]
+[node name="Powerups" type="Node2D" parent="."]
 
-[node name="Enemy" parent="Enemies" instance=ExtResource( 4 )]
-position = Vector2( 288, 96 )
+[node name="Powerup" parent="Powerups" instance=ExtResource( 9 )]
+position = Vector2( 288, 136 )
+
+[node name="Zombies" type="Node2D" parent="."]
+
+[node name="Humans" type="Node2D" parent="."]
+
+[node name="Human" parent="Humans" instance=ExtResource( 4 )]
+position = Vector2( 416, 312 )
 TURN_AFTER = 0
+
+[node name="Human2" parent="Humans" instance=ExtResource( 4 )]
+position = Vector2( 224, 88 )
+TURN_AFTER = 0
+type = 2
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 96, 160 )
 
-[node name="Timer" type="Timer" parent="."]
-
 [node name="Sfx" type="Node" parent="."]
 
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[node name="Music" type="Node" parent="."]
+
+[node name="bpm60" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource( 6 )
+
+[node name="bpm90" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource( 5 )
+
+[node name="bpm120" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource( 7 )
+
+[connection signal="finished" from="Music/bpm60" to="." method="_on_bpm60_finished"]
+[connection signal="finished" from="Music/bpm90" to="." method="_on_bpm90_finished"]
+[connection signal="finished" from="Music/bpm120" to="." method="_on_bpm120_finished"]
