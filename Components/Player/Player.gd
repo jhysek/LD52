@@ -54,7 +54,12 @@ func _input(event):
 		
 	if event is InputEventKey and event.is_action_pressed('ui_accept'):
 		if !dashing:
-			dash()
+			if game.is_floor(map_pos + direction * 2):
+				dash()
+			else:
+				print("CANNOT DASH, NOT SAFE...")
+	
+	next_safe_direction()
 			
 func dash():
 	dashing = true
@@ -85,14 +90,17 @@ func jump_to_map_pos(new_map_pos, duration = 0.2):
 	$Tween.start()
 
 	map_pos = new_map_pos
-	var human = game.human_at(map_pos)
-	if human:
-		human.zombified()
+	$ZombifyCheckTimer.start()
 	next_safe_direction()
 		
 func next_safe_direction():
+	var iterations = 0
 	while !game.is_floor(map_pos + direction): 
 		next_direction()		
+		iterations += 1
+		if iterations > 2:
+			direction = Vector2(0,0)
+			break
 		
 func next_direction():
 	direction = direction.rotated(PI)
@@ -109,7 +117,12 @@ func rotate_according_direction(obj):
 		Vector2.UP: obj.rotation_degrees = -90
 		Vector2.DOWN: obj.rotation_degrees = 90
 
-
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Jump":
 		$AnimationPlayer.play("Idle")
+
+func _on_ZombifyCheckTimer_timeout():
+	var human = game.human_at(map_pos)
+	if human:
+		human.zombified(true)
+		

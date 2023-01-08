@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Brains_60.mp3-d30c5c96b84886c515c74b2f47529630.mp3str"
+
+[deps]
+
+source_file="res://Assets/Brains_60.mp3"
+dest_files=[ "res://.import/Brains_60.mp3-d30c5c96b84886c515c74b2f47529630.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/HVD_Poster.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Components/BrainIndicator/BrainIndicator.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=3]
+size = 28
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 2 )
+
+[node name="BrainIndicator" type="Node2D"]
+position = Vector2( 0, 8 )
+script = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="."]
+margin_top = -16.0
+margin_right = 227.0
+margin_bottom = 11.0
+custom_fonts/font = SubResource( 3 )
+text = "HARVESTED BRAINS"
+__meta__ = {
+"_edit_use_anchors_": true
+}

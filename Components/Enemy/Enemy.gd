@@ -6,7 +6,6 @@ export var TURN_AFTER = 3
 export var HAS_FOV = false
 export var ZOMBIFY_COOLDOWN = 5
 
-
 onready var game = get_node("/root/Game")
 var map_pos = Vector2(0,0)
 var direction = Vector2.RIGHT
@@ -54,7 +53,6 @@ func jump():
 		return
 		
 	if zombify_timeout > 0:
-		print("Zombifying")
 		zombify_timeout -= 1
 		return
 		
@@ -63,17 +61,18 @@ func jump():
 		
 	jump_to_map_pos(map_pos + direction)
 	
-func zombified():
-	$AnimationPlayer.play("Zomobify")
-	mode = Modes.zombie
-	zombify_timeout = ZOMBIFY_COOLDOWN
-	$FOV.hide()
-	game.zombified(self)
+func zombified(by_player = false):
+	if mode == Modes.human:
+		$AnimationPlayer.stop()
+		$AnimationPlayer.play("Zombify")
+		mode = Modes.zombie
+		zombify_timeout = ZOMBIFY_COOLDOWN
+		$FOV.hide()
+		game.zombified(self, by_player)
 	
 func finish_zombification():
-	$Visual.hide()
 	$VisualZombie.scale = $Visual.scale
-	$VisualZombie.show()
+	$AnimationPlayer.play("FinishZombification")
 	
 func is_human():
 	return mode == Modes.human
@@ -109,13 +108,16 @@ func jump_to_map_pos(new_map_pos, duration = 0.3):
 		$VisualZombie.scale.x = -0.5
 	if new_map_pos.x > map_pos.x:
 		$Visual.scale.x = 0.5
-		$VisualZombie.scale.x = -0.5
+		$VisualZombie.scale.x = 0.5
 		
 	var new_pos = to_world_pos(new_map_pos)
 	$Tween.interpolate_property(self, 'position', position, new_pos, duration, Tween.TRANS_EXPO, Tween.EASE_OUT)
 	$Tween.start()
 	$AnimationPlayer.play("Jump")
 	map_pos = new_map_pos
+	
+	if mode == Modes.zombie:
+		$ZombifyCheckTimer.start()
 	
 	if TURN_AFTER > 0:
 		step_counter += 1
@@ -126,9 +128,16 @@ func jump_to_map_pos(new_map_pos, duration = 0.3):
 	next_safe_direction()
 	
 func next_safe_direction():
+	var iterations = 0
 	while !game.is_floor(map_pos + direction) or \
-		 game.is_occupied_by_player(map_pos + direction) or \
+		 (mode == Modes.human && (game.is_occupied_by_player(map_pos + direction) or \
+		 game.is_occupied_by_player(map_pos + direction * 2))) or \
 		 game.is_occupied_by_zombie(map_pos + direction, self):
+		
+		iterations += 1
+		if iterations > DIRECTIONS.size():
+			direction = Vector2(0,0)
+			break
 		next_direction()
 		
 func next_direction():
@@ -170,6 +179,9 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 			$AnimationPlayer.play("Idle")
 		else:
 			$AnimationPlayer.play("IdleZombie")
+			
+	if anim_name == "Zombify":
+		finish_zombification()
 
 
 func load_girl_sprites():
@@ -182,3 +194,7 @@ func load_girl_sprites():
 	$VisualZombie/Body/Head.texture = load("res://Components/Enemy/head_girl_zombie.png")
 	$VisualZombie/Body.texture = load("res://Components/Enemy/body_girl.png")
 	
+func _on_ZombifyCheckTimer_timeout():
+	var human = game.human_at(map_pos)
+	if human:
+		human.zombified()

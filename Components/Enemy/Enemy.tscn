@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Components/Player/legs.png" type="Texture" id=1]
 [ext_resource path="res://Components/Enemy/Enemy.gd" type="Script" id=2]
@@ -11,6 +11,57 @@
 [ext_resource path="res://Components/Enemy/arm_boy_zombie.png" type="Texture" id=9]
 [ext_resource path="res://Components/Enemy/head_boy_zombie.png" type="Texture" id=10]
 
+[sub_resource type="Animation" id=6]
+resource_name = "FinishZombification"
+tracks/0/type = "value"
+tracks/0/path = NodePath("VisualZombie:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("VisualZombie:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Visual:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Visual:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
 [sub_resource type="Animation" id=1]
 resource_name = "Idle"
 loop = true
@@ -21,10 +72,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 16, 0 ), Vector2( 32, 0 ), Vector2( 16, 0 ), Vector2( 32, 0 ), Vector2( 16, 0 ) ]
+"values": [ Vector2( 16, 0 ), Vector2( 32, 0 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Visual/Body/ArmBack:rotation_degrees")
@@ -145,6 +196,42 @@ tracks/10/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0.0, 46.1267 ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("Visual:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("VisualZombie:visible")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("Visual:modulate")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -553,9 +640,57 @@ tracks/17/keys = {
 "update": 0,
 "values": [ Vector2( 16.342, -4.18801 ) ]
 }
+tracks/18/type = "value"
+tracks/18/path = NodePath("VisualZombie:modulate")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("VisualZombie:visible")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("Visual:modulate")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/21/type = "value"
+tracks/21/path = NodePath("Visual:visible")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=5]
-resource_name = "Zomobify"
+resource_name = "Zombify"
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Visual/Body:position")
@@ -603,7 +738,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 0.6, 1, 1.5, 2 ),
 "transitions": PoolRealArray( 0.267943, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 28.3542, 113.085, 87.9719, 113.085, 8.67383 ]
+"values": [ 28.3542, 113.085, 87.9719, 113.085, 16.2486 ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Visual/Body/ArmBack:rotation_degrees")
@@ -615,7 +750,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 0.6, 1, 2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 52.9245, 129.576, 98.0656, -1.30854 ]
+"values": [ 52.9245, 129.576, 98.0656, 6.46939 ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("AnimationPlayer:playback_speed")
@@ -639,21 +774,105 @@ tracks/6/keys = {
 "times": PoolRealArray( 0, 0.6, 2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 19, -6.71798 ), Vector2( -13.9827, -14.4347 ), Vector2( 15.5767, -7.30533 ) ]
+"values": [ Vector2( 19, -6.71798 ), Vector2( -13.9827, -14.4347 ), Vector2( 16.1988, -5.15754 ) ]
 }
 tracks/7/type = "method"
 tracks/7/path = NodePath(".")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
-tracks/7/enabled = true
+tracks/7/enabled = false
 tracks/7/keys = {
-"times": PoolRealArray( 1.6 ),
+"times": PoolRealArray( 2 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
 "method": "finish_zombification"
 } ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("VisualZombie:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = false
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Visual:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -1, -9 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Visual/Body/ArmFront:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -13.1474, -0.382236 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("Visual:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("Visual:modulate")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("VisualZombie:modulate")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("VisualZombie:position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -1, -9 ) ]
 }
 
 [node name="Enemy" type="Node2D"]
@@ -665,8 +884,13 @@ position = Vector2( 0.5, 5 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 7 )
 
+[node name="DirectionIndicator" type="Sprite" parent="."]
+position = Vector2( 0, -8 )
+texture = ExtResource( 3 )
+offset = Vector2( 16, 0 )
+
 [node name="VisualZombie" type="Node2D" parent="."]
-visible = false
+modulate = Color( 1, 1, 1, 0 )
 position = Vector2( -0.75, -10.5 )
 scale = Vector2( 0.5, 0.5 )
 
@@ -697,6 +921,7 @@ texture = ExtResource( 10 )
 offset = Vector2( -7, -37 )
 
 [node name="Visual" type="Node2D" parent="."]
+visible = false
 position = Vector2( -0.5, -7 )
 scale = Vector2( 0.5, 0.5 )
 
@@ -750,17 +975,18 @@ texture = ExtResource( 4 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idle"
 playback_speed = 2.0
+anims/FinishZombification = SubResource( 6 )
 anims/Idle = SubResource( 1 )
 anims/IdleZombie = SubResource( 3 )
 anims/Jump = SubResource( 4 )
 anims/RESET = SubResource( 2 )
-anims/Zomobify = SubResource( 5 )
+anims/Zombify = SubResource( 5 )
 
 [node name="Tween" type="Tween" parent="."]
 
-[node name="DirectionIndicator" type="Sprite" parent="."]
-position = Vector2( 0, -8 )
-texture = ExtResource( 3 )
-offset = Vector2( 16, 0 )
+[node name="ZombifyCheckTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="timeout" from="ZombifyCheckTimer" to="." method="_on_ZombifyCheckTimer_timeout"]

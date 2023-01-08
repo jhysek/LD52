@@ -20,6 +20,7 @@ onready var music = $Music/bpm90
 var switch_speed_to = false
 var time
 var changing_time = false
+var paused = false
 
 
 const SPEEDS = {
@@ -40,13 +41,34 @@ func _ready():
 	beat_duration = SPEEDS[bpm]
 	music = $Music.get_node("bpm" + str(bpm))
 	
+	$BrainIndicator.initialize($Humans.get_child_count())
+	
 	start_game()
-	if DEBUG:
-		set_process_input(true)
+	set_process_input(true)
 		
 func _input(event):
-	if event is InputEventKey and event.is_action_pressed('ui_debug'):
-		_on_Timer_timeout()
+	if event is InputEventKey and event.is_action_pressed('ui_cancel'):
+		if !paused:
+			paused = true
+			music.set_stream_paused(true)
+			$PauseMenu.show()
+		else:
+			paused = false
+			$PauseMenu.hide()
+			music.set_stream_paused(false)
+		
+	if DEBUG:
+		if event is InputEventKey and event.is_action_pressed('ui_debug'):
+			_on_Timer_timeout()
+
+		if Input.is_action_just_pressed("ui_debug"):
+			if bpm == "60":
+				switch_speed_to = "90"
+				return
+			
+			if bpm == "90":
+				switch_speed_to = "120"
+				return
 
 func start_game():
 	generate_floor_plan()
@@ -55,7 +77,13 @@ func start_game():
 		music.play()
 		set_process(true)
 
-func _process(delta):		
+func restart_level():
+	get_tree().change_scene("res://Scenes/Game.tscn")
+
+func _process(delta):	
+	if paused:
+		return
+			
 	var oldtime = time
 	time = music.get_playback_position() + AudioServer.get_time_since_last_mix()
 	time -= AudioServer.get_output_latency() # - 0.01
@@ -69,15 +97,7 @@ func _process(delta):
 		if switch_speed_to:
 			switch_speed(switch_speed_to, time)
 			switch_speed_to = false
-			
-	if Input.is_action_just_pressed("ui_debug"):
-		if bpm == "60":
-			switch_speed_to = "90"
-			return
-		
-		if bpm == "90":
-			switch_speed_to = "120"
-			return
+
 					
 	
 func switch_speed(new_speed, time):
@@ -163,7 +183,7 @@ func is_player(map_pos):
 	return $Player.map_pos == map_pos
 
 func _on_Timer_timeout():
-	print("+++++ BEAT +++++")
+	switch_floor_cells()
 	if config.auto:
 		$Player.jump()
 	for human in $Humans.get_children():
@@ -179,7 +199,22 @@ func jump():
 		zombie.jump()
 	generate_floor_plan()
 	
-func zombified(human):
+func zombified(human, by_me = false):
+	if by_me:
+		$BrainIndicator.brain_harvested()
+	else:
+		$BrainIndicator.brain_lost()
+		
+	if $BrainIndicator.all_harvested():
+		paused = true
+		print("END GAME! ALL DONE")
+		if $BrainIndicator.gained_all():
+			print("WON")
+			$LevelFinished.show()
+		else:
+			print("LOSE")
+			$LevelFailed.show()
+
 	var parent = human.get_parent()
 	parent.remove_child(human)
 	$Zombies.add_child(human)
@@ -216,3 +251,16 @@ func _on_bpm60_finished():
 func _on_bpm120_finished():
 	music.play()
 	next_beat_at = beat_duration
+
+func switch_floor_cells():
+	for cell in tilemap.get_used_cells():
+		if tilemap.get_cellv(cell) == 1:
+			tilemap.set_cellv(cell, 2)
+		elif tilemap.get_cellv(cell) == 2:
+			tilemap.set_cellv(cell, 1)
+		
+func _on_Quit_pressed():
+	get_tree().change_scene("res://Scenes/Menu.tscn")
+
+func _on_Start_pressed():
+	LevelSwitcher.next_level()
