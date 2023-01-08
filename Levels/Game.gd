@@ -23,6 +23,7 @@ var switch_speed_to = false
 var time
 var changing_time = false
 var paused = false
+var started = false
 
 
 const SPEEDS = {
@@ -44,14 +45,21 @@ func _ready():
 	music = $Music.get_node("bpm" + str(bpm))
 	
 	$BrainIndicator.initialize($Humans.get_child_count())
-	if LevelSwitcher.current_level == 0:
+	
+	started = false
+	if with_tutorial:
+		$SpaceToStart.hide()
 		$Tutorial/AnimationPlayer.play("Tutorial")
 	else:
-		start_game()
+		$Tutorial/AnimationPlayer.play("WaitForStart")
+		
 	set_process_input(true)
 		
 func _input(event):
-	if event is InputEventKey and event.is_action_pressed('ui_cancel'):
+	if !started and event is InputEventKey and event.is_action_pressed('ui_accept'):
+		start_game()
+		
+	if started and event is InputEventKey and event.is_action_pressed('ui_cancel'):
 		if !paused:
 			paused = true
 			music.set_stream_paused(true)
@@ -75,6 +83,8 @@ func _input(event):
 				return
 
 func start_game():
+	started = true
+	$Tutorial/AnimationPlayer.play_backwards("WaitForStart")
 	Music.stop()
 	generate_floor_plan()
 	if !DEBUG and (config.auto or config.freestyle):
@@ -86,7 +96,7 @@ func restart_level():
 	get_tree().change_scene("res://Scenes/Game.tscn")
 
 func _process(delta):	
-	if paused:
+	if paused or !started:
 		return
 			
 	var oldtime = time
@@ -271,7 +281,6 @@ func _on_FinishTimeout_timeout():
 		$LevelFinished.show()
 	else:
 		$LevelFailed.show()
-
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Tutorial":

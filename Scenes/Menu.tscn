@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Assets/HVD_Poster.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scenes/Menu.gd" type="Script" id=2]
@@ -6,9 +6,13 @@
 [ext_resource path="res://UI/Button.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/zombie.png" type="Texture" id=5]
 [ext_resource path="res://Assets/bg.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Tileset.tres" type="TileSet" id=7]
 
 [sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0.0705882, 0.0745098, 0.0745098, 1 )
+
+[sub_resource type="CanvasItemMaterial" id=10]
+light_mode = 1
 
 [sub_resource type="DynamicFont" id=1]
 size = 100
@@ -40,6 +44,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( -416, -304 ), Vector2( -416, -330 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 0.7 ),
+"transitions": PoolRealArray( 0.406126, 1.7411, 0.406126, 1.7411 ),
+"update": 0,
+"values": [ Vector2( -328, 152 ), Vector2( -328, 120 ), Vector2( -328, 152 ), Vector2( -328, 120 ) ]
+}
 
 [sub_resource type="Animation" id=9]
 length = 0.001
@@ -55,6 +71,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( -416, -304 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -328, 152 ) ]
+}
 
 [node name="Menu" type="Node2D"]
 script = ExtResource( 2 )
@@ -68,18 +96,26 @@ custom_styles/panel = SubResource( 6 )
 
 [node name="Bg" type="Sprite" parent="."]
 modulate = Color( 0.831373, 1, 0.764706, 0.317647 )
-position = Vector2( -3.05176e-05, 0 )
-scale = Vector2( 1.168, 1 )
+position = Vector2( 3.99989, 0 )
+scale = Vector2( 1.72, 1 )
 texture = ExtResource( 6 )
+
+[node name="TileMap" type="TileMap" parent="."]
+modulate = Color( 0.541176, 0.541176, 0.541176, 1 )
+material = SubResource( 10 )
+scale = Vector2( 2, 2 )
+tile_set = ExtResource( 7 )
+cell_size = Vector2( 64, 56 )
+format = 1
+tile_data = PoolIntArray( -262143, 0, 0, -262142, 11, 0, -262141, 0, 0, -196606, 0, 0, -196605, 6, 0, -131069, 0, 0, -65532, 6, 0, 65531, 6, 0, 65532, 0, 0, 65533, 6, 0, 65534, 0, 0, 4, 0, 0, 5, 6, 0, 131067, 0, 0, 131068, 6, 0, 131069, 0, 0, 131070, 6, 0, 131071, 0, 0, 65536, 11, 0, 65537, 0, 0, 65538, 11, 0, 65539, 0, 0, 65540, 6, 0, 65541, 0, 0, 196603, 6, 0, 196604, 0, 0, 196605, 6, 0, 196606, 0, 0 )
 
 [node name="Title" type="Label" parent="."]
 margin_left = -416.0
 margin_top = -304.0
-margin_right = 417.0
+margin_right = 248.0
 margin_bottom = -159.0
 custom_fonts/font = SubResource( 1 )
 text = "Brains"
-align = 1
 
 [node name="Disclaimer" type="Label" parent="."]
 margin_left = 24.0
@@ -96,14 +132,18 @@ current = true
 
 [node name="Start" parent="." instance=ExtResource( 4 )]
 material = SubResource( 7 )
+margin_left = -64.0
+margin_top = 0.0
+margin_right = 207.0
+margin_bottom = 69.0
 
 [node name="Light2D" type="Light2D" parent="."]
-position = Vector2( 239, -271 )
+position = Vector2( -72, -336 )
 texture = ExtResource( 3 )
 energy = 1.2
 
 [node name="Light2D2" type="Light2D" parent="."]
-position = Vector2( 19, 78 )
+position = Vector2( 416, 56 )
 texture = ExtResource( 3 )
 energy = 1.2
 
@@ -113,9 +153,10 @@ energy = 1.2
 
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 0.392157, 0.392157, 0.392157, 1 )
-position = Vector2( -340, 214 )
-scale = Vector2( 0.5, 0.5 )
+position = Vector2( -328, 152 )
+scale = Vector2( 0.6, 0.6 )
 texture = ExtResource( 5 )
+offset = Vector2( -30, -130 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Bounce"

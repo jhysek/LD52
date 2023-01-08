@@ -40,7 +40,7 @@ var FOV = [
 
 func _ready():	
 	set_direction(DIRECTIONS[DIRECTION_IDX])
-	jump_to_map_pos(get_map_pos() - Vector2(1,0), 0.1)
+	jump_to_map_pos(get_map_pos() - Vector2(0,0), 0.1)
 	if !HAS_FOV:
 		$FOV.hide()
 	else:

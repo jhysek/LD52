@@ -18,7 +18,7 @@ margin_top = -16.0
 margin_right = 227.0
 margin_bottom = 11.0
 custom_fonts/font = SubResource( 3 )
-text = "HARVESTED BRAINS"
+text = "BRAINS"
 __meta__ = {
 "_edit_use_anchors_": true
 }

@@ -5,13 +5,15 @@ var total = 0
 var gained = 0
 var lost = 0
 
+const BRAIN_OFFSET = 130
+
 func initialize(new_total):
 	total = new_total
 	for i in range(total):
 		var brain = Brain.instance()
 		brain.name = "Brain" + str(i + 1)
 		add_child(brain)
-		brain.position = Vector2(296 + i * 72, 0)
+		brain.position = Vector2(BRAIN_OFFSET + i * 72, 0)
 
 func gained_all():
 	return gained == total
@@ -34,5 +36,5 @@ func animate_brain_harvest(from_world_position):
 	brain.modulate = Color("ffffff")
 	get_parent().add_child(brain)
 	brain.position = from_world_position
-	brain.tween_to(global_position + Vector2(296 + (gained - 1) * 72, 0))
+	brain.tween_to(global_position + Vector2(BRAIN_OFFSET + (gained - 1) * 72, 0))
 	

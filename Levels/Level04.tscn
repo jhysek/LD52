@@ -242,6 +242,14 @@
 15/shapes = [  ]
 15/z_index = 0
 
+[sub_resource type="DynamicFont" id=3]
+size = 40
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 27
+font_data = ExtResource( 4 )
+
 [sub_resource type="Animation" id=5]
 length = 0.001
 tracks/0/type = "value"
@@ -328,18 +336,6 @@ tracks/6/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
-tracks/7/type = "value"
-tracks/7/path = NodePath("Tutorial/L03:modulate")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ) ]
-}
 
 [sub_resource type="Animation" id=4]
 resource_name = "Tutorial"
@@ -399,19 +395,7 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 7.1, 7.6, 9.4, 10 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("Tutorial/L03:modulate")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0, 9.2, 10 ),
+"times": PoolRealArray( 0, 7.1, 7.6 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
@@ -474,14 +458,6 @@ use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 4 )
 
-[sub_resource type="DynamicFont" id=3]
-size = 40
-font_data = ExtResource( 4 )
-
-[sub_resource type="DynamicFont" id=7]
-size = 27
-font_data = ExtResource( 4 )
-
 [sub_resource type="DynamicFont" id=8]
 size = 40
 use_mipmaps = true
@@ -491,7 +467,7 @@ font_data = ExtResource( 4 )
 [node name="Game" type="Node2D"]
 script = ExtResource( 6 )
 bpm = "60"
-with_tutorial = true
+disable_blink = false
 
 [node name="Bg" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0.529412 )
@@ -514,66 +490,31 @@ current = true
 tile_set = SubResource( 1 )
 cell_size = Vector2( 64, 56 )
 format = 1
-tile_data = PoolIntArray( 65536, 0, 0, 65537, 1, 0, 65538, 0, 0, 65542, 0, 0, 65543, 1, 0, 65544, 0, 0, 131072, 1, 0, 131073, 0, 0, 131074, 1, 0, 131075, 0, 0, 131076, 1, 0, 131077, 0, 0, 131078, 1, 0, 131079, 0, 0, 131080, 1, 0, 196608, 0, 0, 196609, 1, 0, 196610, 0, 0, 196614, 0, 0, 196615, 1, 0, 196616, 0, 0 )
+tile_data = PoolIntArray( 8, 2, 0, 65542, 11, 0, 65543, 2, 0, 65544, 11, 0, 65545, 2, 0, 65546, 11, 0, 131078, 2, 0, 131079, 11, 0, 131080, 2, 0, 131081, 11, 0, 131082, 2, 0, 196614, 11, 0, 196615, 2, 0, 196616, 11, 0, 196617, 2, 0, 196618, 11, 0, 262152, 2, 0 )
 
 [node name="Powerups" type="Node2D" parent="."]
 
 [node name="Humans" type="Node2D" parent="."]
 
 [node name="Human" parent="Humans" instance=ExtResource( 11 )]
-position = Vector2( 416, 88 )
+position = Vector2( 609, 137 )
 TURN_AFTER = 0
+type = 2
 
 [node name="Zombies" type="Node2D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource( 9 )]
-position = Vector2( 96, 144 )
+position = Vector2( 408, 146 )
 
 [node name="BrainIndicator" parent="." instance=ExtResource( 7 )]
 position = Vector2( -160, -144 )
 
-[node name="Tutorial" type="Node2D" parent="."]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Tutorial"]
-root_node = NodePath("../..")
-anims/RESET = SubResource( 5 )
-anims/Tutorial = SubResource( 4 )
-anims/WaitForStart = SubResource( 9 )
-
-[node name="L01" type="Label" parent="Tutorial"]
-modulate = Color( 1, 1, 1, 0 )
-margin_top = -8.0
-margin_right = 323.0
-margin_bottom = 57.0
-rect_scale = Vector2( 0.25, 0.25 )
-custom_fonts/font = SubResource( 6 )
-text = "You zombie"
-
-[node name="L02" type="Label" parent="Tutorial"]
-modulate = Color( 1, 1, 1, 0 )
-margin_left = 384.0
-margin_right = 806.0
-margin_bottom = 65.0
-rect_scale = Vector2( 0.25, 0.25 )
-custom_fonts/font = SubResource( 6 )
-text = "BRAIN... YUMMY!"
-
-[node name="L03" type="Label" parent="Tutorial"]
-modulate = Color( 1, 1, 1, 0 )
-margin_left = 232.0
-margin_top = 208.0
-margin_right = 679.0
-margin_bottom = 273.0
-rect_scale = Vector2( 0.25, 0.25 )
-custom_fonts/font = SubResource( 6 )
-text = "WASD / ARROWS"
-
 [node name="PauseMenu" type="Panel" parent="."]
 visible = false
 margin_left = 120.0
-margin_top = 312.0
+margin_top = 80.0
 margin_right = 480.0
-margin_bottom = 512.0
+margin_bottom = 280.0
 
 [node name="Title" type="Label" parent="PauseMenu"]
 margin_left = 120.0
@@ -595,10 +536,10 @@ R    to restart level"
 
 [node name="LevelFailed" type="Panel" parent="."]
 visible = false
-margin_left = 64.0
-margin_top = 216.0
-margin_right = 504.0
-margin_bottom = 520.0
+margin_left = 40.0
+margin_top = 80.0
+margin_right = 480.0
+margin_bottom = 384.0
 
 [node name="Zombie" type="Sprite" parent="LevelFailed"]
 position = Vector2( 22.5492, 192 )
@@ -631,10 +572,10 @@ text = " give up"
 
 [node name="LevelFinished" type="Panel" parent="."]
 visible = false
-margin_left = 80.0
-margin_top = 272.0
-margin_right = 496.0
-margin_bottom = 520.0
+margin_left = 64.0
+margin_top = 80.0
+margin_right = 480.0
+margin_bottom = 328.0
 
 [node name="Zombie" type="Sprite" parent="LevelFinished"]
 position = Vector2( 32, 160 )
@@ -679,6 +620,32 @@ stream = ExtResource( 5 )
 
 [node name="LevelFinished" type="AudioStreamPlayer" parent="Music"]
 
+[node name="Tutorial" type="Node2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Tutorial"]
+root_node = NodePath("../..")
+anims/RESET = SubResource( 5 )
+anims/Tutorial = SubResource( 4 )
+anims/WaitForStart = SubResource( 9 )
+
+[node name="L01" type="Label" parent="Tutorial"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = -8.0
+margin_right = 323.0
+margin_bottom = 57.0
+rect_scale = Vector2( 0.25, 0.25 )
+custom_fonts/font = SubResource( 6 )
+text = "You zombie"
+
+[node name="L02" type="Label" parent="Tutorial"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 384.0
+margin_right = 806.0
+margin_bottom = 65.0
+rect_scale = Vector2( 0.25, 0.25 )
+custom_fonts/font = SubResource( 6 )
+text = "BRAIN... YUMMY!"
+
 [node name="SpaceToStart" type="Label" parent="."]
 margin_left = 88.0
 margin_top = -96.0
@@ -688,7 +655,6 @@ custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = SubResource( 8 )
 text = "press SPACE to start"
 
-[connection signal="animation_finished" from="Tutorial/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="pressed" from="LevelFailed/Restart" to="." method="restart_level"]
 [connection signal="pressed" from="LevelFailed/Quit" to="." method="_on_Quit_pressed"]
 [connection signal="pressed" from="LevelFinished/Start" to="." method="_on_Start_pressed"]
@@ -696,3 +662,4 @@ text = "press SPACE to start"
 [connection signal="finished" from="Music/bpm60" to="." method="_on_bpm60_finished"]
 [connection signal="finished" from="Music/bpm90" to="." method="_on_bpm90_finished"]
 [connection signal="finished" from="Music/bpm120" to="." method="_on_bpm120_finished"]
+[connection signal="animation_finished" from="Tutorial/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
