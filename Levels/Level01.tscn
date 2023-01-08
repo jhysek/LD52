@@ -249,7 +249,7 @@ script = ExtResource( 6 )
 bpm = "60"
 
 [node name="Vignette" type="Sprite" parent="."]
-modulate = Color( 1, 1, 1, 0.152941 )
+modulate = Color( 1, 1, 1, 0.25098 )
 material = SubResource( 2 )
 position = Vector2( 316, 199 )
 scale = Vector2( 1.29, 1.54 )
