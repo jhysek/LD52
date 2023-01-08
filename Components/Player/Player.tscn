@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
+[ext_resource path="res://Assets/jump.wav" type="AudioStream" id=1]
 [ext_resource path="res://Components/Player/Player.gd" type="Script" id=2]
 [ext_resource path="res://Components/Player/indicator.png" type="Texture" id=3]
 [ext_resource path="res://Components/Player/legs.png" type="Texture" id=4]
@@ -7,6 +8,7 @@
 [ext_resource path="res://Components/Player/head.png" type="Texture" id=6]
 [ext_resource path="res://Components/Player/body.png" type="Texture" id=7]
 [ext_resource path="res://Components/Player/shadow.png" type="Texture" id=8]
+[ext_resource path="res://Components/Enemy/attack.wav" type="AudioStream" id=9]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Idle"
@@ -327,6 +329,15 @@ anims/RESET = SubResource( 2 )
 [node name="ZombifyCheckTimer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
+
+[node name="Sfx" type="Node" parent="."]
+
+[node name="Jump" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource( 1 )
+volume_db = -18.0
+
+[node name="Attack" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource( 9 )
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="ZombifyCheckTimer" to="." method="_on_ZombifyCheckTimer_timeout"]

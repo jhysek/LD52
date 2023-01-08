@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/HVD_Poster.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://UI/Button.gd" type="Script" id=2]
+[ext_resource path="res://Assets/click.wav" type="AudioStream" id=3]
 
 [sub_resource type="DynamicFont" id=3]
 size = 35
@@ -32,8 +33,10 @@ text = "Start Game"
 script = ExtResource( 2 )
 
 [node name="Hover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
 
 [node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
 
 [connection signal="mouse_entered" from="." to="." method="_on_Start_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_Start_mouse_exited"]

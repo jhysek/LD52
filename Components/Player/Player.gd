@@ -93,6 +93,7 @@ func jump_to_map_pos(new_map_pos, duration = 0.2):
 	if new_map_pos.x > map_pos.x:
 		$Visual.scale.x = 0.5
 	$AnimationPlayer.play("Jump")
+	$Sfx/Jump.play()
 	$Tween.interpolate_property(self, 'position', position, new_pos, duration, Tween.TRANS_EXPO, Tween.EASE_OUT)
 	$Tween.start()
 
@@ -110,9 +111,6 @@ func next_safe_direction():
 			break
 		
 func next_direction():
-	#direction = direction.rotated(PI)
-	#direction = Vector2(int(direction.x), int(direction.y))
-	#rotate_according_direction($DirectionIndicator)
 	DIRECTION_IDX += 1
 	set_direction(DIRECTIONS[DIRECTION_IDX % DIRECTIONS.size()])
 	
@@ -137,5 +135,6 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 func _on_ZombifyCheckTimer_timeout():
 	var human = game.human_at(map_pos)
 	if human:
+		$Sfx/Attack.play()
 		human.zombified(true)
 		

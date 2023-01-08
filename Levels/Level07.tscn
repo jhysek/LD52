@@ -466,7 +466,6 @@ font_data = ExtResource( 4 )
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 6 )
-bpm = "60"
 disable_blink = false
 
 [node name="Bg" type="Sprite" parent="."]
@@ -490,31 +489,40 @@ current = true
 tile_set = SubResource( 1 )
 cell_size = Vector2( 64, 56 )
 format = 1
-tile_data = PoolIntArray( 65539, 0, 0, 65540, 0, 0, 65541, 1, 0, 65542, 0, 0, 65543, 0, 0, 131075, 0, 0, 131076, 0, 0, 131077, 1, 0, 131078, 0, 0, 131079, 0, 0, 196611, 0, 0, 196612, 2, 0, 196613, 1, 0, 196614, 2, 0, 196615, 0, 0, 262149, 2, 0 )
+tile_data = PoolIntArray( 196606, 6, 0, 196607, 10, 0, 131072, 6, 0, 131073, 10, 0, 131074, 6, 0, 131075, 10, 0, 131076, 6, 0, 131077, 10, 0, 131078, 6, 0, 131079, 10, 0, 131080, 6, 0, 131081, 10, 0, 196608, 10, 0, 196609, 6, 0, 196611, 6, 0, 196612, 10, 0, 196613, 6, 0, 196614, 10, 0, 196615, 6, 0, 196617, 6, 0, 262144, 6, 0, 262145, 10, 0, 262147, 10, 0, 262148, 6, 0, 262149, 10, 0, 262150, 6, 0, 262151, 10, 0, 262153, 10, 0, 327680, 10, 0, 327681, 6, 0, 327685, 6, 0, 327689, 6, 0, 393216, 6, 0, 393217, 10, 0, 393218, 11, 0, 393219, 10, 0, 393221, 1, 0, 393222, 2, 0, 393223, 1, 0, 393224, 2, 0, 393225, 1, 0, 458752, 10, 0, 458757, 2, 0, 458758, 1, 0, 458759, 2, 0, 458760, 1, 0, 458761, 2, 0, 524288, 6, 0, 524289, 10, 0, 524290, 6, 0, 524291, 10, 0, 524292, 6, 0, 524293, 1, 0, 524294, 2, 0, 524295, 1, 0, 524296, 2, 0, 524297, 1, 0 )
 
 [node name="Powerups" type="Node2D" parent="."]
 
 [node name="Humans" type="Node2D" parent="."]
 
 [node name="Human" parent="Humans" instance=ExtResource( 11 )]
-position = Vector2( 422, 134 )
+position = Vector2( 479, 194 )
+TURN_AFTER = 0
+
+[node name="Human2" parent="Humans" instance=ExtResource( 11 )]
+position = Vector2( -96, 139 )
+TURN_AFTER = 0
+type = 2
+
+[node name="Human3" parent="Humans" instance=ExtResource( 11 )]
+position = Vector2( 352, 477 )
 TURN_AFTER = 0
 type = 2
 
 [node name="Zombies" type="Node2D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource( 9 )]
-position = Vector2( 214, 139 )
+position = Vector2( 285, 144 )
 
 [node name="BrainIndicator" parent="." instance=ExtResource( 7 )]
 position = Vector2( -160, -144 )
 
 [node name="PauseMenu" type="Panel" parent="."]
 visible = false
-margin_left = 172.0
-margin_top = 304.0
-margin_right = 532.0
-margin_bottom = 504.0
+margin_left = 122.0
+margin_top = 277.0
+margin_right = 482.0
+margin_bottom = 477.0
 
 [node name="Title" type="Label" parent="PauseMenu"]
 margin_left = 120.0
@@ -536,10 +544,10 @@ R    to restart level"
 
 [node name="LevelFailed" type="Panel" parent="."]
 visible = false
-margin_left = 142.0
-margin_top = 243.0
-margin_right = 582.0
-margin_bottom = 547.0
+margin_left = 89.0
+margin_top = 161.0
+margin_right = 529.0
+margin_bottom = 465.0
 
 [node name="Zombie" type="Sprite" parent="LevelFailed"]
 position = Vector2( 22.5492, 192 )
@@ -572,10 +580,10 @@ text = " give up"
 
 [node name="LevelFinished" type="Panel" parent="."]
 visible = false
-margin_left = 153.0
-margin_top = 272.0
-margin_right = 569.0
-margin_bottom = 520.0
+margin_left = 84.0
+margin_top = 213.0
+margin_right = 500.0
+margin_bottom = 461.0
 
 [node name="Zombie" type="Sprite" parent="LevelFinished"]
 position = Vector2( 32, 160 )

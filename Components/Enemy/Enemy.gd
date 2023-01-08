@@ -72,6 +72,7 @@ func zombified(by_player = false):
 	
 func finish_zombification():
 	$VisualZombie.scale = $Visual.scale
+	$Sfx.get_node("Zombified" + str(randi() % 2 + 1)).play()
 	$AnimationPlayer.play("FinishZombification")
 	
 func is_human():
@@ -197,4 +198,5 @@ func load_girl_sprites():
 func _on_ZombifyCheckTimer_timeout():
 	var human = game.human_at(map_pos)
 	if human:
+		$Sfx/Attack.play()
 		human.zombified()

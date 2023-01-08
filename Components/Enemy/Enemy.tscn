@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Components/Player/legs.png" type="Texture" id=1]
 [ext_resource path="res://Components/Enemy/Enemy.gd" type="Script" id=2]
@@ -10,9 +10,13 @@
 [ext_resource path="res://Components/Enemy/head_boy.png" type="Texture" id=8]
 [ext_resource path="res://Components/Enemy/arm_boy_zombie.png" type="Texture" id=9]
 [ext_resource path="res://Components/Enemy/head_boy_zombie.png" type="Texture" id=10]
+[ext_resource path="res://Components/Enemy/zombified2.wav" type="AudioStream" id=11]
+[ext_resource path="res://Components/Enemy/attack.wav" type="AudioStream" id=12]
+[ext_resource path="res://Components/Enemy/zombified1.wav" type="AudioStream" id=13]
 
 [sub_resource type="Animation" id=6]
 resource_name = "FinishZombification"
+length = 0.7
 tracks/0/type = "value"
 tracks/0/path = NodePath("VisualZombie:modulate")
 tracks/0/interp = 1
@@ -20,7 +24,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
+"times": PoolRealArray( 0, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
@@ -44,7 +48,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 1 ),
+"times": PoolRealArray( 0, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
@@ -56,7 +60,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 1 ),
+"times": PoolRealArray( 0, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
@@ -987,6 +991,17 @@ anims/Zombify = SubResource( 5 )
 [node name="ZombifyCheckTimer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
+
+[node name="Sfx" type="Node" parent="."]
+
+[node name="Attack" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource( 12 )
+
+[node name="Zombified1" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource( 11 )
+
+[node name="Zombified2" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource( 13 )
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="ZombifyCheckTimer" to="." method="_on_ZombifyCheckTimer_timeout"]

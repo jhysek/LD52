@@ -24,6 +24,7 @@ var time
 var changing_time = false
 var paused = false
 var started = false
+var finished = false
 
 
 const SPEEDS = {
@@ -133,7 +134,6 @@ func _process(delta):
 			switch_speed_to = false
 
 					
-	
 func switch_speed(new_speed, time):
 	changing_time = true
 	print("TIME: " + str(time))
@@ -248,6 +248,7 @@ func zombified(human, by_me = false):
 		$BrainIndicator.brain_lost()
 		
 	if $BrainIndicator.all_harvested():
+		finished = true
 		$FinishTimeout.start()
 
 	var parent = human.get_parent()
@@ -276,16 +277,19 @@ func is_occupied_by_player(map_pos):
 	return player and player.map_pos == map_pos
 
 func _on_bpm90_finished():
-	music.play()
-	next_beat_at = beat_duration
+	if !finished:
+		music.play()
+		next_beat_at = beat_duration
 
 func _on_bpm60_finished():
-	music.play()
-	next_beat_at = beat_duration
+	if !finished:
+		music.play()
+		next_beat_at = beat_duration
 
 func _on_bpm120_finished():
-	music.play()
-	next_beat_at = beat_duration
+	if !finished:
+		music.play()
+		next_beat_at = beat_duration
 
 func switch_floor_cells():
 	for cell in tilemap.get_used_cells():
@@ -301,11 +305,23 @@ func _on_Start_pressed():
 	LevelSwitcher.next_level()
 
 func _on_FinishTimeout_timeout():
+	var time_convert_ratio = SPEEDS["120"] / beat_duration 
+	beat_duration = SPEEDS["120"]
+	music.stop()
+	$Music/bpm60.stop()
+	$Music/bpm90.stop()
+	$Music/bpm120.play(time_convert_ratio * time)
+	
 	paused = true
 	if $BrainIndicator.gained_all():
 		$LevelFinished.show()
 	else:
 		$LevelFailed.show()
+		
+	for zombie in $Zombies.get_children():
+		zombie.get_node("DirectionIndicator").hide()
+		zombie.get_node("AnimationPlayer").play("IdleZombie")
+	$Player.get_node("DirectionIndicator").hide()
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Tutorial":
