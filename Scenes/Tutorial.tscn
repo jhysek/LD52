@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Assets/HVD_Poster.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://Scenes/Menu.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Tutorial.gd" type="Script" id=2]
 [ext_resource path="res://Assets/light.png" type="Texture" id=3]
 [ext_resource path="res://UI/Button.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/human.png" type="Texture" id=5]
@@ -80,8 +80,16 @@ zoom = Vector2( 1.3, 1.3 )
 material = SubResource( 7 )
 margin_left = -408.0
 margin_top = 384.0
-margin_right = -137.0
+margin_right = -128.0
 margin_bottom = 453.0
+
+[node name="Start2" parent="." instance=ExtResource( 4 )]
+material = SubResource( 7 )
+margin_left = -640.0
+margin_top = 384.0
+margin_right = -432.0
+margin_bottom = 453.0
+text = "< MENU"
 
 [node name="Light2D" type="Light2D" parent="."]
 position = Vector2( -72, -336 )
@@ -186,8 +194,8 @@ margin_right = 926.0
 margin_bottom = -181.0
 rect_scale = Vector2( 0.6, 0.6 )
 custom_fonts/font = SubResource( 11 )
-text = "3. Humans see only where they go
-4. zombie smarter...  yummy human!"
+text = "5. Humans see only where they go
+6. zombie smarter...  yummy human!"
 
 [node name="Sprite" type="Sprite" parent="Human3"]
 position = Vector2( 120, -6.10352e-05 )
@@ -195,3 +203,4 @@ scale = Vector2( -0.4, 0.4 )
 texture = ExtResource( 9 )
 
 [connection signal="pressed" from="Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="Start2" to="." method="_on_Start2_pressed"]

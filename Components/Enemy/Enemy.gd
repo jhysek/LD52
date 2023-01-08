@@ -51,7 +51,7 @@ func _ready():
 func jump():
 	if dead: 
 		return
-		
+	print("MAP POS: " + str(map_pos))
 	if zombify_timeout > 0:
 		zombify_timeout -= 1
 		return

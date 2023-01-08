@@ -25,6 +25,8 @@ var changing_time = false
 var paused = false
 var started = false
 var finished = false
+var minx = 999
+var miny = 999
 
 
 const SPEEDS = {
@@ -60,9 +62,9 @@ func _ready():
 	set_process_input(true)
 		
 func get_map_size(cells):
-	var minx = 999
+	minx = 999
 	var maxx = -999
-	var miny = 999
+	miny = 999
 	var maxy = -999
 	for cell in cells:
 		if cell.x < minx:
@@ -74,7 +76,10 @@ func get_map_size(cells):
 		if cell.y > maxy: 
 			maxy = cell.y  
 	
-	return Vector2(maxx - minx, maxy - miny)
+	print("MINX: " + str(minx))
+	print("MINY: " + str(miny))
+	print("MAP SIZE: " + str(Vector2(maxx - minx + 1, maxy - miny + 1)))
+	return Vector2(maxx - minx + 1, maxy - miny + 1)
 		
 func _input(event):
 	if !started and event is InputEventKey and event.is_action_pressed('ui_accept'):
@@ -201,9 +206,12 @@ func generate_floor_plan():
 				floor_plan.add_point(get_cell_id(x, y), Vector3(x, y, 0))
 
   # Add connections
-	for x in range(map_size.x):
-		for y in range(map_size.y):
+	for xx in range(map_size.x):
+		for yy in range(map_size.y):
+			var x = minx + xx
+			var y = miny + yy
 			var cell_id = get_cell_id(x, y)
+			print("CELL: " + str(x) + "x" + str(y))
 			if floor_plan.has_point(cell_id):
 				# get neighbours
 				if accessible_cell(get_cell_xy(x + 1, y)):
