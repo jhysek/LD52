@@ -27,3 +27,12 @@ func brain_lost():
 	
 func all_harvested():
 	return  gained + lost >= total
+	
+func animate_brain_harvest(from_world_position):
+	var brain = Brain.instance()
+	brain.name = "TemporaryBrain"
+	brain.modulate = Color("ffffff")
+	get_parent().add_child(brain)
+	brain.position = from_world_position
+	brain.tween_to(global_position + Vector2(296 + (gained - 1) * 72, 0))
+	

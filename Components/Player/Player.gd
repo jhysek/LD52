@@ -12,7 +12,7 @@ onready var superhot_style = false
 onready var free_style = false
 
 func _ready():
-	jump_to_map_pos(get_map_pos(), 0.1)
+	jump_to_map_pos(get_map_pos() - Vector2(1, 0), 0.1)
 	set_process_input(true)
 
 func busted():

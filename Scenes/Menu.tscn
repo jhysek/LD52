@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Assets/HVD_Poster.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scenes/Menu.gd" type="Script" id=2]
 [ext_resource path="res://Assets/light.png" type="Texture" id=3]
 [ext_resource path="res://UI/Button.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/zombie.png" type="Texture" id=5]
+[ext_resource path="res://Assets/bg.png" type="Texture" id=6]
 
 [sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0.0705882, 0.0745098, 0.0745098, 1 )
@@ -21,6 +22,40 @@ use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 1 )
 
+[sub_resource type="CanvasItemMaterial" id=7]
+light_mode = 1
+
+[sub_resource type="Animation" id=8]
+resource_name = "Bounce"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Title:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.406126, 1.7411 ),
+"update": 0,
+"values": [ Vector2( -416, -304 ), Vector2( -416, -330 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Title:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -416, -304 ) ]
+}
+
 [node name="Menu" type="Node2D"]
 script = ExtResource( 2 )
 
@@ -31,11 +66,17 @@ margin_right = 900.0
 margin_bottom = 506.0
 custom_styles/panel = SubResource( 6 )
 
+[node name="Bg" type="Sprite" parent="."]
+modulate = Color( 0.831373, 1, 0.764706, 0.317647 )
+position = Vector2( -3.05176e-05, 0 )
+scale = Vector2( 1.168, 1 )
+texture = ExtResource( 6 )
+
 [node name="Title" type="Label" parent="."]
-margin_left = -409.0
-margin_top = -301.0
-margin_right = 424.0
-margin_bottom = -156.0
+margin_left = -416.0
+margin_top = -304.0
+margin_right = 417.0
+margin_bottom = -159.0
 custom_fonts/font = SubResource( 1 )
 text = "Brains"
 align = 1
@@ -54,6 +95,7 @@ align = 2
 current = true
 
 [node name="Start" parent="." instance=ExtResource( 4 )]
+material = SubResource( 7 )
 
 [node name="Light2D" type="Light2D" parent="."]
 position = Vector2( 239, -271 )
@@ -74,5 +116,10 @@ modulate = Color( 0.392157, 0.392157, 0.392157, 1 )
 position = Vector2( -340, 214 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 5 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Bounce"
+anims/Bounce = SubResource( 8 )
+anims/RESET = SubResource( 9 )
 
 [connection signal="pressed" from="Start" to="." method="_on_Start_pressed"]

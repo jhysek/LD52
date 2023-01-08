@@ -7,6 +7,8 @@ export var config = {
 	freestyle=false,
 	auto=true
 }
+export var disable_blink = true
+export var with_tutorial = false
 
 var cell_size = Vector2(64, 56)
 var used_cells = []
@@ -42,8 +44,10 @@ func _ready():
 	music = $Music.get_node("bpm" + str(bpm))
 	
 	$BrainIndicator.initialize($Humans.get_child_count())
-	
-	start_game()
+	if LevelSwitcher.current_level == 0:
+		$Tutorial/AnimationPlayer.play("Tutorial")
+	else:
+		start_game()
 	set_process_input(true)
 		
 func _input(event):
@@ -71,6 +75,7 @@ func _input(event):
 				return
 
 func start_game():
+	Music.stop()
 	generate_floor_plan()
 	if !DEBUG and (config.auto or config.freestyle):
 		next_beat_at = beat_duration
@@ -146,7 +151,7 @@ func get_nearest_target_path_from(start_pos):
 		var path = get_nearest_path(start_pos, human.map_pos)
 		if path.size() < shortest_path:
 			shortest_path = path.size()
-			result = path			
+			result = path
 	return result
 
 func generate_floor_plan():
@@ -183,7 +188,8 @@ func is_player(map_pos):
 	return $Player.map_pos == map_pos
 
 func _on_Timer_timeout():
-	switch_floor_cells()
+	if !disable_blink:
+		switch_floor_cells()
 	if config.auto:
 		$Player.jump()
 	for human in $Humans.get_children():
@@ -202,18 +208,12 @@ func jump():
 func zombified(human, by_me = false):
 	if by_me:
 		$BrainIndicator.brain_harvested()
+		$BrainIndicator.animate_brain_harvest(human.position)
 	else:
 		$BrainIndicator.brain_lost()
 		
 	if $BrainIndicator.all_harvested():
-		paused = true
-		print("END GAME! ALL DONE")
-		if $BrainIndicator.gained_all():
-			print("WON")
-			$LevelFinished.show()
-		else:
-			print("LOSE")
-			$LevelFailed.show()
+		$FinishTimeout.start()
 
 	var parent = human.get_parent()
 	parent.remove_child(human)
@@ -264,3 +264,15 @@ func _on_Quit_pressed():
 
 func _on_Start_pressed():
 	LevelSwitcher.next_level()
+
+func _on_FinishTimeout_timeout():
+	paused = true
+	if $BrainIndicator.gained_all():
+		$LevelFinished.show()
+	else:
+		$LevelFailed.show()
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "Tutorial":
+		start_game()

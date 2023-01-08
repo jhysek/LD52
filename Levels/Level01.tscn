@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Assets/Brains_90.mp3" type="AudioStream" id=1]
 [ext_resource path="res://Assets/vignette.png" type="Texture" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://Components/Player/Player.tscn" type="PackedScene" id=9]
 [ext_resource path="res://UI/Button.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Components/Enemy/Enemy.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Assets/zombie.png" type="Texture" id=12]
+[ext_resource path="res://Assets/bg.png" type="Texture" id=13]
 
 [sub_resource type="CanvasItemMaterial" id=2]
 
@@ -244,15 +246,158 @@
 size = 40
 font_data = ExtResource( 4 )
 
+[sub_resource type="DynamicFont" id=7]
+size = 27
+font_data = ExtResource( 4 )
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Camera2D:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Camera2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 312, 200 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Tutorial/L01:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Tutorial/L01:text")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "You zombie" ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Tutorial/L02:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Tutorial"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Camera2D:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 5, 7.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.4, 0.4 ), Vector2( 0.4, 0.4 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Camera2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 5, 7.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 96, 120 ), Vector2( 96, 120 ), Vector2( 312, 200 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Tutorial/L01:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.4, 2, 3, 3.3, 4.1, 5, 5.8, 6.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Tutorial/L01:text")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 2, 4.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ "You zombie", "You zombie", "hungry" ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Tutorial/L02:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 7.1, 7.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="DynamicFont" id=6]
+size = 64
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 4 )
+
 [node name="Game" type="Node2D"]
 script = ExtResource( 6 )
 bpm = "60"
 
+[node name="Bg" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.529412 )
+position = Vector2( 334, 128 )
+scale = Vector2( 1.236, 1 )
+texture = ExtResource( 13 )
+
 [node name="Vignette" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0.25098 )
 material = SubResource( 2 )
-position = Vector2( 316, 199 )
-scale = Vector2( 1.29, 1.54 )
+position = Vector2( 280, 188 )
+scale = Vector2( 1.38, 1.584 )
 texture = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -263,20 +408,119 @@ current = true
 tile_set = SubResource( 1 )
 cell_size = Vector2( 64, 56 )
 format = 1
-tile_data = PoolIntArray( 0, 10, 0, 1, 9, 0, 2, 10, 0, 3, 10, 0, 4, 5, 0, 5, 4, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 8, 0, 65536, 9, 0, 65537, 10, 0, 65538, 9, 0, 65539, 10, 0, 65541, 5, 0, 65542, 0, 0, 65543, 0, 0, 65544, 0, 0, 65545, 0, 0, 131072, 10, 0, 131073, 9, 0, 131074, 10, 0, 131078, 0, 0, 131079, 0, 0, 131080, 0, 0, 131081, 4, 0, 196608, 9, 0, 196609, 10, 0, 196610, 9, 0, 196615, 13, 0, 196616, 14, 0, 196617, 13, 0, 262144, 1, 0, 262145, 0, 0, 262148, 10, 0, 262150, 5, 0, 262151, 14, 0, 262152, 13, 0, 262153, 14, 0, 327680, 0, 0, 327681, 1, 0, 327683, 10, 0, 327684, 0, 0, 327685, 10, 0, 327686, 4, 0, 327687, 13, 0, 327688, 14, 0, 327689, 13, 0, 393216, 1, 0, 393217, 2, 0, 393218, 1, 0, 393219, 2, 0, 393220, 1, 0, 393221, 2, 0, 393222, 1, 0, 393223, 14, 0, 393224, 13, 0, 393225, 14, 0 )
+tile_data = PoolIntArray( 65536, 0, 0, 65537, 1, 0, 65538, 0, 0, 65542, 0, 0, 65543, 1, 0, 65544, 0, 0, 131072, 1, 0, 131073, 0, 0, 131074, 1, 0, 131075, 0, 0, 131076, 1, 0, 131077, 0, 0, 131078, 1, 0, 131079, 0, 0, 131080, 1, 0, 196608, 0, 0, 196609, 1, 0, 196610, 0, 0, 196614, 0, 0, 196615, 1, 0, 196616, 0, 0 )
 
 [node name="Powerups" type="Node2D" parent="."]
 
 [node name="Humans" type="Node2D" parent="."]
 
 [node name="Human" parent="Humans" instance=ExtResource( 11 )]
-position = Vector2( 280, 32 )
+position = Vector2( 416, 88 )
 TURN_AFTER = 0
 
 [node name="Zombies" type="Node2D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource( 9 )]
-position = Vector2( 96, 160 )
+position = Vector2( 96, 144 )
+
+[node name="BrainIndicator" parent="." instance=ExtResource( 7 )]
+position = Vector2( -160, -144 )
+
+[node name="PauseMenu" type="Panel" parent="."]
+visible = false
+margin_left = 120.0
+margin_top = 80.0
+margin_right = 480.0
+margin_bottom = 280.0
+
+[node name="Title" type="Label" parent="PauseMenu"]
+margin_left = 120.0
+margin_top = 32.0
+margin_right = 241.0
+margin_bottom = 70.0
+custom_colors/font_color = Color( 0.529412, 0.662745, 0.505882, 1 )
+custom_fonts/font = SubResource( 3 )
+text = "PAUSED"
+
+[node name="Instructions" type="Label" parent="PauseMenu"]
+margin_left = 40.0
+margin_top = 104.0
+margin_right = 316.0
+margin_bottom = 159.0
+custom_fonts/font = SubResource( 7 )
+text = "ESC  to resume
+R    to restart level"
+
+[node name="LevelFailed" type="Panel" parent="."]
+visible = false
+margin_left = 40.0
+margin_top = 80.0
+margin_right = 480.0
+margin_bottom = 384.0
+
+[node name="Zombie" type="Sprite" parent="LevelFailed"]
+position = Vector2( 22.5492, 192 )
+scale = Vector2( 0.455156, 0.48 )
+texture = ExtResource( 12 )
+
+[node name="Title" type="Label" parent="LevelFailed"]
+margin_left = 16.0
+margin_top = 32.0
+margin_right = 416.0
+margin_bottom = 103.0
+custom_colors/font_color = Color( 0.529412, 0.662745, 0.505882, 1 )
+custom_fonts/font = SubResource( 3 )
+text = "NEED MORE BRAINS!"
+align = 1
+
+[node name="Restart" parent="LevelFailed" instance=ExtResource( 10 )]
+margin_left = 120.0
+margin_top = 104.0
+margin_right = 391.0
+margin_bottom = 173.0
+text = "Again"
+
+[node name="Quit" parent="LevelFailed" instance=ExtResource( 10 )]
+margin_left = 120.0
+margin_top = 200.0
+margin_right = 391.0
+margin_bottom = 269.0
+text = " give up"
+
+[node name="LevelFinished" type="Panel" parent="."]
+visible = false
+margin_left = 64.0
+margin_top = 80.0
+margin_right = 480.0
+margin_bottom = 328.0
+
+[node name="Zombie" type="Sprite" parent="LevelFinished"]
+position = Vector2( 32, 160 )
+scale = Vector2( 0.396774, 0.4 )
+texture = ExtResource( 12 )
+
+[node name="Title" type="Label" parent="LevelFinished"]
+margin_left = 16.0
+margin_top = 32.0
+margin_right = 392.0
+margin_bottom = 103.0
+custom_colors/font_color = Color( 0.529412, 0.662745, 0.505882, 1 )
+custom_fonts/font = SubResource( 3 )
+text = "YUMMY BRAINS!"
+align = 1
+
+[node name="Start" parent="LevelFinished" instance=ExtResource( 10 )]
+margin_left = 128.0
+margin_top = 136.0
+margin_right = 376.0
+margin_bottom = 205.0
+text = "more!"
+
+[node name="LevelIndicator" type="Node2D" parent="."]
+
+[node name="FinishTimeout" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
 
 [node name="Sfx" type="Node" parent="."]
 
@@ -291,80 +535,38 @@ stream = ExtResource( 1 )
 [node name="bpm120" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource( 5 )
 
-[node name="BrainIndicator" parent="." instance=ExtResource( 7 )]
-position = Vector2( -160, -144 )
+[node name="LevelFinished" type="AudioStreamPlayer" parent="Music"]
 
-[node name="PauseMenu" type="Panel" parent="."]
-visible = false
-margin_left = 120.0
-margin_top = 80.0
-margin_right = 480.0
-margin_bottom = 296.0
+[node name="Tutorial" type="Node2D" parent="."]
 
-[node name="Title" type="Label" parent="PauseMenu"]
-margin_left = 120.0
-margin_top = 32.0
-margin_right = 241.0
-margin_bottom = 70.0
-custom_fonts/font = SubResource( 3 )
-text = "PAUSED"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Tutorial"]
+root_node = NodePath("../..")
+anims/RESET = SubResource( 5 )
+anims/Tutorial = SubResource( 4 )
 
-[node name="LevelFailed" type="Panel" parent="."]
-visible = false
-margin_left = 120.0
-margin_top = 80.0
-margin_right = 480.0
-margin_bottom = 368.0
+[node name="L01" type="Label" parent="Tutorial"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = -8.0
+margin_right = 323.0
+margin_bottom = 57.0
+rect_scale = Vector2( 0.25, 0.25 )
+custom_fonts/font = SubResource( 6 )
+text = "You zombie"
 
-[node name="Title" type="Label" parent="LevelFailed"]
-margin_left = 16.0
-margin_top = 32.0
-margin_right = 344.0
-margin_bottom = 103.0
-custom_fonts/font = SubResource( 3 )
-text = "MORE BRAINS!"
-align = 1
+[node name="L02" type="Label" parent="Tutorial"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 384.0
+margin_right = 806.0
+margin_bottom = 65.0
+rect_scale = Vector2( 0.25, 0.25 )
+custom_fonts/font = SubResource( 6 )
+text = "BRAIN... YUMMY!"
 
-[node name="Restart" parent="LevelFailed" instance=ExtResource( 10 )]
-margin_left = 40.0
-margin_top = 96.0
-margin_right = 311.0
-margin_bottom = 165.0
-text = "Again"
-
-[node name="Quit" parent="LevelFailed" instance=ExtResource( 10 )]
-margin_left = 40.0
-margin_top = 192.0
-margin_right = 311.0
-margin_bottom = 261.0
-text = " give up"
-
-[node name="LevelFinished" type="Panel" parent="."]
-visible = false
-margin_left = 120.0
-margin_top = 80.0
-margin_right = 480.0
-margin_bottom = 288.0
-
-[node name="Title" type="Label" parent="LevelFinished"]
-margin_left = 16.0
-margin_top = 32.0
-margin_right = 344.0
-margin_bottom = 103.0
-custom_fonts/font = SubResource( 3 )
-text = "Much BRAINS!"
-align = 1
-
-[node name="Start" parent="LevelFinished" instance=ExtResource( 10 )]
-margin_left = 40.0
-margin_top = 96.0
-margin_right = 311.0
-margin_bottom = 165.0
-text = "more!"
-
-[connection signal="finished" from="Music/bpm60" to="." method="_on_bpm60_finished"]
-[connection signal="finished" from="Music/bpm90" to="." method="_on_bpm90_finished"]
-[connection signal="finished" from="Music/bpm120" to="." method="_on_bpm120_finished"]
 [connection signal="pressed" from="LevelFailed/Restart" to="." method="restart_level"]
 [connection signal="pressed" from="LevelFailed/Quit" to="." method="_on_Quit_pressed"]
 [connection signal="pressed" from="LevelFinished/Start" to="." method="_on_Start_pressed"]
+[connection signal="timeout" from="FinishTimeout" to="." method="_on_FinishTimeout_timeout"]
+[connection signal="finished" from="Music/bpm60" to="." method="_on_bpm60_finished"]
+[connection signal="finished" from="Music/bpm90" to="." method="_on_bpm90_finished"]
+[connection signal="finished" from="Music/bpm120" to="." method="_on_bpm120_finished"]
+[connection signal="animation_finished" from="Tutorial/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

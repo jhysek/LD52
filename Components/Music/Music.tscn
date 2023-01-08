@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Assets/menu.mp3" type="AudioStream" id=1]
+
+[node name="Music" type="AudioStreamPlayer"]
+stream = ExtResource( 1 )
+volume_db = -6.318
+autoplay = true

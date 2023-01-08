@@ -5,7 +5,7 @@
 
 [sub_resource type="Animation" id=1]
 resource_name = "Activate"
-length = 0.7
+length = 1.2
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
@@ -13,7 +13,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
+"times": PoolRealArray( 0.5, 0.8 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0.34902 ), Color( 1, 1, 1, 1 ) ]
@@ -25,7 +25,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3, 0.6 ),
+"times": PoolRealArray( 0.5, 0.8, 1.1 ),
 "transitions": PoolRealArray( 0.25, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 1, 1 ), Vector2( 2, 2 ), Vector2( 1, 1 ) ]
@@ -66,3 +66,7 @@ script = ExtResource( 2 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Activate = SubResource( 1 )
 anims/RESET = SubResource( 2 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]

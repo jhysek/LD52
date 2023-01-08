@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/HVD_Poster.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://UI/Button.gd" type="Script" id=2]
 
 [sub_resource type="DynamicFont" id=3]
 size = 35
@@ -9,10 +10,10 @@ use_filter = true
 font_data = ExtResource( 1 )
 
 [sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 0.341176, 0.0627451, 0.0627451, 1 )
+bg_color = Color( 0.529412, 0.662745, 0.505882, 1 )
 
 [sub_resource type="StyleBoxFlat" id=7]
-bg_color = Color( 0.454902, 0.509804, 0.560784, 1 )
+bg_color = Color( 0.529412, 0.662745, 0.505882, 1 )
 
 [sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0, 0, 0, 0.529412 )
@@ -28,3 +29,12 @@ custom_styles/hover = SubResource( 4 )
 custom_styles/pressed = SubResource( 7 )
 custom_styles/normal = SubResource( 5 )
 text = "Start Game"
+script = ExtResource( 2 )
+
+[node name="Hover" type="AudioStreamPlayer" parent="."]
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+
+[connection signal="mouse_entered" from="." to="." method="_on_Start_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_Start_mouse_exited"]
+[connection signal="pressed" from="." to="." method="_on_Start_pressed"]
