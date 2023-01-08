@@ -96,7 +96,7 @@ func jump_to_map_pos(new_map_pos, duration = 0.2):
 	$Sfx/Jump.play()
 	$Tween.interpolate_property(self, 'position', position, new_pos, duration, Tween.TRANS_EXPO, Tween.EASE_OUT)
 	$Tween.start()
-
+	z_index = new_map_pos.y
 	map_pos = new_map_pos
 	$ZombifyCheckTimer.start()
 	next_safe_direction()

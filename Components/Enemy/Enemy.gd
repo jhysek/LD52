@@ -117,6 +117,8 @@ func jump_to_map_pos(new_map_pos, duration = 0.3):
 	$AnimationPlayer.play("Jump")
 	map_pos = new_map_pos
 	
+	z_index = new_map_pos.y
+		
 	if mode == Modes.zombie:
 		$ZombifyCheckTimer.start()
 	
@@ -125,7 +127,6 @@ func jump_to_map_pos(new_map_pos, duration = 0.3):
 		if step_counter >= TURN_AFTER:
 			step_counter = 0
 			next_direction()
-			
 	next_safe_direction()
 	
 func next_safe_direction():

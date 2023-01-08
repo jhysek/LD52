@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Assets/Brains_90.mp3" type="AudioStream" id=1]
 [ext_resource path="res://Assets/vignette.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Components/Enemy/Enemy.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Assets/zombie.png" type="Texture" id=12]
 [ext_resource path="res://Assets/bg.png" type="Texture" id=13]
+[ext_resource path="res://Assets/level_succeeded.mp3" type="AudioStream" id=14]
 
 [sub_resource type="CanvasItemMaterial" id=2]
 
@@ -678,6 +679,7 @@ stream = ExtResource( 1 )
 stream = ExtResource( 5 )
 
 [node name="LevelFinished" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource( 14 )
 
 [node name="SpaceToStart" type="Label" parent="."]
 margin_left = 88.0

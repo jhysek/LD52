@@ -148,7 +148,6 @@ func switch_speed(new_speed, time):
 	
 	next_beat_at = time_convert_ratio * time + beat_duration
 	time = time_convert_ratio * time 
-	print("NEXT BEAT AT: " + str(next_beat_at))
 	changing_time = false
 	
 func player_is_busted():
@@ -316,6 +315,8 @@ func _on_FinishTimeout_timeout():
 	if $BrainIndicator.gained_all():
 		$LevelFinished.show()
 	else:
+		$Music/LevelFinished.stream = load("res://Assets/level_failed.mp3")
+		$Music/LevelFinished.play()
 		$LevelFailed.show()
 		
 	for zombie in $Zombies.get_children():

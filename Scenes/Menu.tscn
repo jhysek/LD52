@@ -133,9 +133,17 @@ current = true
 [node name="Start" parent="." instance=ExtResource( 4 )]
 material = SubResource( 7 )
 margin_left = -64.0
+margin_top = -96.0
+margin_right = 320.0
+margin_bottom = -27.0
+
+[node name="Start2" parent="." instance=ExtResource( 4 )]
+material = SubResource( 7 )
+margin_left = -64.0
 margin_top = 0.0
-margin_right = 207.0
+margin_right = 320.0
 margin_bottom = 69.0
+text = "How Human works"
 
 [node name="Light2D" type="Light2D" parent="."]
 position = Vector2( -72, -336 )
@@ -164,3 +172,4 @@ anims/Bounce = SubResource( 8 )
 anims/RESET = SubResource( 9 )
 
 [connection signal="pressed" from="Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="Start2" to="." method="_on_Start2_pressed"]
