@@ -184,25 +184,21 @@ func get_nearest_target_path_from(start_pos):
 	return result
 
 func add_line(start, end):
-	print("ADDING LINE")
 	var line = Line2D.new()
 	add_child(line)
 	line.points.append(start)
 	line.points.append(end)
 
 func generate_floor_plan():
-	print("GENERATING PLAN")
 	if !floor_plan:
 		floor_plan = AStar.new()
 	else:
 		floor_plan.clear()
 
-	print("adding nodes.. map_size: ", map_size)
   # Add nodes
 	for x in range(map_size.x + 1):
 		for y in range(map_size.y + 1):
 			if accessible_cell(get_cell_xy(x, y)):
-				print("ADDING POINT - " + str(x) + " x " + str(y))
 				floor_plan.add_point(get_cell_id(x, y), Vector3(x, y, 0))
 
   # Add connections
@@ -212,16 +208,12 @@ func generate_floor_plan():
 			if floor_plan.has_point(cell_id):
 				# get neighbours
 				if accessible_cell(get_cell_xy(x + 1, y)):
-					add_line(Vector2(x,y), Vector2(x+1, y))
 					floor_plan.connect_points(cell_id, get_cell_id(x+1, y))
 				if accessible_cell(get_cell_xy(x, y + 1)):
-					add_line(Vector2(x,y), Vector2(x, y + 1))
 					floor_plan.connect_points(cell_id, get_cell_id(x, y + 1))
 				if accessible_cell(get_cell_xy(x - 1, y)):
-					add_line(Vector2(x,y), Vector2(x - 1, y))
 					floor_plan.connect_points(cell_id, get_cell_id(x-1, y))
 				if accessible_cell(get_cell_xy(x, y - 1)):
-					add_line(Vector2(x,y), Vector2(x, y - 1))
 					floor_plan.connect_points(cell_id, get_cell_id(x, y - 1))
 
 func get_nearest_path(from, to):
