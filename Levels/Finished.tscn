@@ -1,0 +1,118 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Assets/HVD_Poster.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Assets/Brains_90.mp3" type="AudioStream" id=2]
+[ext_resource path="res://Assets/light.png" type="Texture" id=3]
+[ext_resource path="res://Levels/Finished.gd" type="Script" id=4]
+[ext_resource path="res://Assets/zombie.png" type="Texture" id=5]
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.0705882, 0.0745098, 0.0745098, 1 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 100
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=7]
+resource_name = "Bounce"
+length = 1.222
+loop = true
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Title:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.66 ),
+"transitions": PoolRealArray( 0.574349, 1 ),
+"update": 0,
+"values": [ Vector2( -409, -106 ), Vector2( -411, -138 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Title:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -409, -106 ) ]
+}
+
+[node name="Finished" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="Panel" type="Panel" parent="."]
+margin_left = -886.0
+margin_top = -516.0
+margin_right = 900.0
+margin_bottom = 506.0
+custom_styles/panel = SubResource( 6 )
+
+[node name="Title" type="Label" parent="."]
+margin_left = -409.0
+margin_top = -106.0
+margin_right = 424.0
+margin_bottom = 182.0
+custom_fonts/font = SubResource( 1 )
+text = "SUCH HARVEST!
+VERY Brains!
+MUCH WOW"
+align = 1
+
+[node name="Disclaimer" type="Label" parent="."]
+margin_left = -228.0
+margin_top = 340.0
+margin_right = 232.0
+margin_bottom = 364.0
+custom_colors/font_color = Color( 0.356863, 0.356863, 0.356863, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Much Fun, Very Compo, such Ludum Dare!"
+align = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 239, -271 )
+texture = ExtResource( 3 )
+energy = 1.2
+
+[node name="Light2D2" type="Light2D" parent="."]
+position = Vector2( 19, 78 )
+texture = ExtResource( 3 )
+energy = 1.2
+
+[node name="Sfx" type="Node" parent="."]
+
+[node name="Click" type="AudioStreamPlayer" parent="Sfx"]
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0.392157, 0.392157, 0.392157, 1 )
+position = Vector2( -421, -233 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Bounce"
+playback_speed = 1.83
+anims/Bounce = SubResource( 7 )
+anims/RESET = SubResource( 8 )

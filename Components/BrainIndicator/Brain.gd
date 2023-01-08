@@ -1,6 +1,5 @@
 extends Sprite
 
-
 var active = false
 
 func activate():

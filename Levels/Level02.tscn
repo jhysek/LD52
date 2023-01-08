@@ -1,22 +1,22 @@
 [gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://Scenes/Game.gd" type="Script" id=1]
-[ext_resource path="res://Assets/tilemap.png" type="Texture" id=2]
-[ext_resource path="res://Components/Player/Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Components/Enemy/Enemy.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/Brains_90.mp3" type="AudioStream" id=5]
-[ext_resource path="res://Assets/Brains_60.mp3" type="AudioStream" id=6]
-[ext_resource path="res://Assets/Brains_120.mp3" type="AudioStream" id=7]
-[ext_resource path="res://Assets/vignette.png" type="Texture" id=8]
-[ext_resource path="res://Components/BrainIndicator/BrainIndicator.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Assets/HVD_Poster.ttf" type="DynamicFontData" id=10]
+[ext_resource path="res://Assets/Brains_90.mp3" type="AudioStream" id=1]
+[ext_resource path="res://Assets/vignette.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Brains_60.mp3" type="AudioStream" id=3]
+[ext_resource path="res://Components/BrainIndicator/BrainIndicator.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/HVD_Poster.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://Assets/Brains_120.mp3" type="AudioStream" id=6]
+[ext_resource path="res://Components/Player/Player.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Components/Enemy/Enemy.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Levels/Game.gd" type="Script" id=9]
+[ext_resource path="res://Assets/tilemap.png" type="Texture" id=10]
 [ext_resource path="res://UI/Button.tscn" type="PackedScene" id=11]
 
 [sub_resource type="CanvasItemMaterial" id=2]
 
 [sub_resource type="TileSet" id=1]
 0/name = "tilemap.png 0"
-0/texture = ExtResource( 2 )
+0/texture = ExtResource( 10 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 192, 64, 64 )
@@ -30,7 +30,7 @@
 0/shapes = [  ]
 0/z_index = 0
 1/name = "tilemap.png 1"
-1/texture = ExtResource( 2 )
+1/texture = ExtResource( 10 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
 1/region = Rect2( 0, 256, 64, 64 )
@@ -44,7 +44,7 @@
 1/shapes = [  ]
 1/z_index = 0
 2/name = "tilemap.png 2"
-2/texture = ExtResource( 2 )
+2/texture = ExtResource( 10 )
 2/tex_offset = Vector2( 0, 0 )
 2/modulate = Color( 1, 1, 1, 1 )
 2/region = Rect2( 64, 192, 64, 64 )
@@ -58,7 +58,7 @@
 2/shapes = [  ]
 2/z_index = 0
 3/name = "tilemap.png 3"
-3/texture = ExtResource( 2 )
+3/texture = ExtResource( 10 )
 3/tex_offset = Vector2( 0, 0 )
 3/modulate = Color( 1, 1, 1, 1 )
 3/region = Rect2( 64, 256, 64, 64 )
@@ -72,7 +72,7 @@
 3/shapes = [  ]
 3/z_index = 0
 4/name = "tilemap.png 4"
-4/texture = ExtResource( 2 )
+4/texture = ExtResource( 10 )
 4/tex_offset = Vector2( 0, 0 )
 4/modulate = Color( 1, 1, 1, 1 )
 4/region = Rect2( 128, 192, 64, 64 )
@@ -86,7 +86,7 @@
 4/shapes = [  ]
 4/z_index = 0
 5/name = "tilemap.png 5"
-5/texture = ExtResource( 2 )
+5/texture = ExtResource( 10 )
 5/tex_offset = Vector2( 0, 0 )
 5/modulate = Color( 1, 1, 1, 1 )
 5/region = Rect2( 128, 256, 64, 64 )
@@ -100,7 +100,7 @@
 5/shapes = [  ]
 5/z_index = 0
 6/name = "tilemap.png 6"
-6/texture = ExtResource( 2 )
+6/texture = ExtResource( 10 )
 6/tex_offset = Vector2( 0, 0 )
 6/modulate = Color( 1, 1, 1, 1 )
 6/region = Rect2( 0, 320, 64, 64 )
@@ -114,7 +114,7 @@
 6/shapes = [  ]
 6/z_index = 0
 7/name = "tilemap.png 7"
-7/texture = ExtResource( 2 )
+7/texture = ExtResource( 10 )
 7/tex_offset = Vector2( 0, 0 )
 7/modulate = Color( 1, 1, 1, 1 )
 7/region = Rect2( 64, 320, 64, 64 )
@@ -128,7 +128,7 @@
 7/shapes = [  ]
 7/z_index = 0
 8/name = "tilemap.png 8"
-8/texture = ExtResource( 2 )
+8/texture = ExtResource( 10 )
 8/tex_offset = Vector2( 0, 0 )
 8/modulate = Color( 1, 1, 1, 1 )
 8/region = Rect2( 128, 128, 64, 64 )
@@ -142,7 +142,7 @@
 8/shapes = [  ]
 8/z_index = 0
 9/name = "tilemap.png 9"
-9/texture = ExtResource( 2 )
+9/texture = ExtResource( 10 )
 9/tex_offset = Vector2( 0, 0 )
 9/modulate = Color( 1, 1, 1, 1 )
 9/region = Rect2( 192, 128, 64, 64 )
@@ -156,7 +156,7 @@
 9/shapes = [  ]
 9/z_index = 0
 10/name = "tilemap.png 10"
-10/texture = ExtResource( 2 )
+10/texture = ExtResource( 10 )
 10/tex_offset = Vector2( 0, 0 )
 10/modulate = Color( 1, 1, 1, 1 )
 10/region = Rect2( 64, 128, 64, 64 )
@@ -170,7 +170,7 @@
 10/shapes = [  ]
 10/z_index = 0
 11/name = "tilemap.png 11"
-11/texture = ExtResource( 2 )
+11/texture = ExtResource( 10 )
 11/tex_offset = Vector2( 0, 0 )
 11/modulate = Color( 1, 1, 1, 1 )
 11/region = Rect2( 0, 128, 64, 64 )
@@ -184,7 +184,7 @@
 11/shapes = [  ]
 11/z_index = 0
 12/name = "tilemap.png 12"
-12/texture = ExtResource( 2 )
+12/texture = ExtResource( 10 )
 12/tex_offset = Vector2( 0, 0 )
 12/modulate = Color( 1, 1, 1, 1 )
 12/region = Rect2( 64, 0, 64, 64 )
@@ -198,7 +198,7 @@
 12/shapes = [  ]
 12/z_index = 0
 13/name = "tilemap.png 13"
-13/texture = ExtResource( 2 )
+13/texture = ExtResource( 10 )
 13/tex_offset = Vector2( 0, 0 )
 13/modulate = Color( 1, 1, 1, 1 )
 13/region = Rect2( 64, 64, 64, 64 )
@@ -212,7 +212,7 @@
 13/shapes = [  ]
 13/z_index = 0
 14/name = "tilemap.png 14"
-14/texture = ExtResource( 2 )
+14/texture = ExtResource( 10 )
 14/tex_offset = Vector2( 0, 0 )
 14/modulate = Color( 1, 1, 1, 1 )
 14/region = Rect2( 0, 64, 64, 64 )
@@ -226,7 +226,7 @@
 14/shapes = [  ]
 14/z_index = 0
 15/name = "tilemap.png 15"
-15/texture = ExtResource( 2 )
+15/texture = ExtResource( 10 )
 15/tex_offset = Vector2( 0, 0 )
 15/modulate = Color( 1, 1, 1, 1 )
 15/region = Rect2( 0, 0, 64, 64 )
@@ -242,10 +242,10 @@
 
 [sub_resource type="DynamicFont" id=3]
 size = 40
-font_data = ExtResource( 10 )
+font_data = ExtResource( 5 )
 
 [node name="Game" type="Node2D"]
-script = ExtResource( 1 )
+script = ExtResource( 9 )
 bpm = "60"
 
 [node name="Vignette" type="Sprite" parent="."]
@@ -253,7 +253,7 @@ modulate = Color( 1, 1, 1, 0.152941 )
 material = SubResource( 2 )
 position = Vector2( 316, 199 )
 scale = Vector2( 1.29, 1.54 )
-texture = ExtResource( 8 )
+texture = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 312, 200 )
@@ -263,19 +263,24 @@ current = true
 tile_set = SubResource( 1 )
 cell_size = Vector2( 64, 56 )
 format = 1
-tile_data = PoolIntArray( 0, 10, 0, 1, 9, 0, 2, 10, 0, 3, 10, 0, 4, 5, 0, 5, 4, 0, 65536, 9, 0, 65537, 10, 0, 65538, 9, 0, 65539, 10, 0, 65541, 5, 0, 131072, 10, 0, 131073, 9, 0, 131074, 10, 0, 131081, 4, 0, 196608, 9, 0, 196609, 10, 0, 196610, 9, 0, 196615, 5, 0, 196616, 4, 0, 196617, 5, 0, 262144, 1, 0, 262145, 0, 0, 262148, 10, 0, 262150, 5, 0, 262151, 4, 0, 262152, 5, 0, 262153, 4, 0, 327680, 0, 0, 327681, 1, 0, 327683, 10, 0, 327684, 0, 0, 327685, 10, 0, 327686, 4, 0, 327687, 5, 0, 327688, 4, 0, 327689, 5, 0, 393216, 1, 0, 393217, 0, 0, 393218, 1, 0, 393219, 0, 0, 393220, 10, 0, 393221, 10, 0, 393222, 10, 0, 393223, 4, 0, 393224, 5, 0, 393225, 4, 0 )
+tile_data = PoolIntArray( -65529, 0, 0, -65528, 0, 0, 0, 10, 0, 1, 9, 0, 2, 10, 0, 3, 10, 0, 4, 5, 0, 5, 4, 0, 8, 0, 0, 65536, 9, 0, 65537, 10, 0, 65538, 9, 0, 65539, 10, 0, 65541, 5, 0, 65544, 0, 0, 65545, 0, 0, 131072, 10, 0, 131073, 9, 0, 131074, 10, 0, 131081, 0, 0, 262143, 0, 0, 196608, 9, 0, 196609, 10, 0, 196610, 9, 0, 196615, 5, 0, 196616, 4, 0, 196617, 0, 0, 327679, 0, 0, 262144, 1, 0, 262145, 0, 0, 262148, 10, 0, 262150, 5, 0, 262151, 4, 0, 262152, 5, 0, 262153, 0, 0, 393215, 0, 0, 327680, 0, 0, 327681, 1, 0, 327683, 10, 0, 327684, 0, 0, 327685, 10, 0, 327686, 4, 0, 327687, 5, 0, 327688, 4, 0, 327689, 0, 0, 458751, 0, 0, 393216, 0, 0, 393217, 0, 0, 393218, 1, 0, 393219, 0, 0, 393220, 10, 0, 393221, 10, 0, 393222, 10, 0, 393223, 0, 0, 393224, 0, 0, 393225, 0, 0, 458752, 0, 0, 458753, 0, 0, 458754, 0, 0, 458755, 0, 0, 458756, 0, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0 )
 
 [node name="Powerups" type="Node2D" parent="."]
 
 [node name="Humans" type="Node2D" parent="."]
 
-[node name="Human" parent="Humans" instance=ExtResource( 4 )]
+[node name="Human" parent="Humans" instance=ExtResource( 8 )]
 position = Vector2( 280, 32 )
 TURN_AFTER = 0
 
+[node name="Human2" parent="Humans" instance=ExtResource( 8 )]
+position = Vector2( 408, 304 )
+TURN_AFTER = 0
+type = 2
+
 [node name="Zombies" type="Node2D" parent="."]
 
-[node name="Player" parent="." instance=ExtResource( 3 )]
+[node name="Player" parent="." instance=ExtResource( 7 )]
 position = Vector2( 96, 160 )
 
 [node name="Sfx" type="Node" parent="."]
@@ -283,15 +288,15 @@ position = Vector2( 96, 160 )
 [node name="Music" type="Node" parent="."]
 
 [node name="bpm60" type="AudioStreamPlayer" parent="Music"]
-stream = ExtResource( 6 )
+stream = ExtResource( 3 )
 
 [node name="bpm90" type="AudioStreamPlayer" parent="Music"]
-stream = ExtResource( 5 )
+stream = ExtResource( 1 )
 
 [node name="bpm120" type="AudioStreamPlayer" parent="Music"]
-stream = ExtResource( 7 )
+stream = ExtResource( 6 )
 
-[node name="BrainIndicator" parent="." instance=ExtResource( 9 )]
+[node name="BrainIndicator" parent="." instance=ExtResource( 4 )]
 position = Vector2( -160, -144 )
 
 [node name="PauseMenu" type="Panel" parent="."]
@@ -340,6 +345,7 @@ margin_bottom = 261.0
 text = " give up"
 
 [node name="LevelFinished" type="Panel" parent="."]
+visible = false
 margin_left = 120.0
 margin_top = 80.0
 margin_right = 480.0
