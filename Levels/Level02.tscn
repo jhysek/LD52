@@ -511,10 +511,10 @@ position = Vector2( -160, -144 )
 
 [node name="PauseMenu" type="Panel" parent="."]
 visible = false
-margin_left = 120.0
-margin_top = 80.0
-margin_right = 480.0
-margin_bottom = 280.0
+margin_left = 172.0
+margin_top = 304.0
+margin_right = 532.0
+margin_bottom = 504.0
 
 [node name="Title" type="Label" parent="PauseMenu"]
 margin_left = 120.0
@@ -536,10 +536,10 @@ R    to restart level"
 
 [node name="LevelFailed" type="Panel" parent="."]
 visible = false
-margin_left = 40.0
-margin_top = 80.0
-margin_right = 480.0
-margin_bottom = 384.0
+margin_left = 142.0
+margin_top = 243.0
+margin_right = 582.0
+margin_bottom = 547.0
 
 [node name="Zombie" type="Sprite" parent="LevelFailed"]
 position = Vector2( 22.5492, 192 )
@@ -572,10 +572,10 @@ text = " give up"
 
 [node name="LevelFinished" type="Panel" parent="."]
 visible = false
-margin_left = 64.0
-margin_top = 80.0
-margin_right = 480.0
-margin_bottom = 328.0
+margin_left = 153.0
+margin_top = 272.0
+margin_right = 569.0
+margin_bottom = 520.0
 
 [node name="Zombie" type="Sprite" parent="LevelFinished"]
 position = Vector2( 32, 160 )

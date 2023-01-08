@@ -490,31 +490,35 @@ current = true
 tile_set = SubResource( 1 )
 cell_size = Vector2( 64, 56 )
 format = 1
-tile_data = PoolIntArray( 8, 2, 0, 65542, 11, 0, 65543, 2, 0, 65544, 11, 0, 65545, 2, 0, 65546, 11, 0, 131078, 2, 0, 131079, 11, 0, 131080, 2, 0, 131081, 11, 0, 131082, 2, 0, 196614, 11, 0, 196615, 2, 0, 196616, 11, 0, 196617, 2, 0, 196618, 11, 0, 262152, 2, 0 )
+tile_data = PoolIntArray( 0, 15, 0, 1, 14, 0, 2, 15, 0, 7, 15, 0, 8, 14, 0, 9, 15, 0, 131071, 15, 0, 65536, 12, 0, 65537, 15, 0, 65538, 12, 0, 65539, 15, 0, 65542, 15, 0, 65543, 12, 0, 65544, 15, 0, 65545, 12, 0, 65546, 15, 0, 196607, 14, 0, 131072, 15, 0, 131073, 14, 0, 131074, 15, 0, 131075, 14, 0, 131076, 15, 0, 131077, 15, 0, 131078, 14, 0, 131079, 15, 0, 131080, 14, 0, 131081, 15, 0, 131082, 14, 0, 262143, 15, 0, 196608, 12, 0, 196609, 15, 0, 196610, 12, 0, 196611, 15, 0, 196614, 15, 0, 196615, 12, 0, 196616, 15, 0, 196617, 12, 0, 196618, 15, 0, 262144, 15, 0, 262145, 14, 0, 262146, 15, 0, 262151, 15, 0, 262152, 14, 0, 262153, 15, 0 )
 
 [node name="Powerups" type="Node2D" parent="."]
 
 [node name="Humans" type="Node2D" parent="."]
 
 [node name="Human" parent="Humans" instance=ExtResource( 11 )]
-position = Vector2( 609, 137 )
+position = Vector2( 541, 250 )
+TURN_AFTER = 0
+
+[node name="Human2" parent="Humans" instance=ExtResource( 11 )]
+position = Vector2( 30, 21 )
 TURN_AFTER = 0
 type = 2
 
 [node name="Zombies" type="Node2D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource( 9 )]
-position = Vector2( 408, 146 )
+position = Vector2( 285, 144 )
 
 [node name="BrainIndicator" parent="." instance=ExtResource( 7 )]
 position = Vector2( -160, -144 )
 
 [node name="PauseMenu" type="Panel" parent="."]
 visible = false
-margin_left = 120.0
-margin_top = 80.0
-margin_right = 480.0
-margin_bottom = 280.0
+margin_left = 133.0
+margin_top = 282.0
+margin_right = 493.0
+margin_bottom = 482.0
 
 [node name="Title" type="Label" parent="PauseMenu"]
 margin_left = 120.0
@@ -536,10 +540,10 @@ R    to restart level"
 
 [node name="LevelFailed" type="Panel" parent="."]
 visible = false
-margin_left = 40.0
-margin_top = 80.0
-margin_right = 480.0
-margin_bottom = 384.0
+margin_left = 104.0
+margin_top = 212.0
+margin_right = 544.0
+margin_bottom = 516.0
 
 [node name="Zombie" type="Sprite" parent="LevelFailed"]
 position = Vector2( 22.5492, 192 )
@@ -572,10 +576,10 @@ text = " give up"
 
 [node name="LevelFinished" type="Panel" parent="."]
 visible = false
-margin_left = 64.0
-margin_top = 80.0
-margin_right = 480.0
-margin_bottom = 328.0
+margin_left = 105.0
+margin_top = 226.0
+margin_right = 521.0
+margin_bottom = 474.0
 
 [node name="Zombie" type="Sprite" parent="LevelFinished"]
 position = Vector2( 32, 160 )

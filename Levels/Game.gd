@@ -39,7 +39,9 @@ func _ready():
 	used_cells = tilemap.get_used_cells()
 	var first_cell = used_cells[0]
 	var last_cell = used_cells[used_cells.size() - 1]
-	map_size = Vector2(last_cell.x - first_cell.x, last_cell.y - first_cell.y)
+	
+	map_size = get_map_size(used_cells)
+	#map_size = Vector2(last_cell.x - first_cell.x, last_cell.y - first_cell.y)
 	
 	beat_duration = SPEEDS[bpm]
 	music = $Music.get_node("bpm" + str(bpm))
@@ -47,6 +49,7 @@ func _ready():
 	$BrainIndicator.initialize($Humans.get_child_count())
 	
 	started = false
+	generate_floor_plan()
 	if with_tutorial:
 		$SpaceToStart.hide()
 		$Tutorial/AnimationPlayer.play("Tutorial")
@@ -54,6 +57,23 @@ func _ready():
 		$Tutorial/AnimationPlayer.play("WaitForStart")
 		
 	set_process_input(true)
+		
+func get_map_size(cells):
+	var minx = 999
+	var maxx = -999
+	var miny = 999
+	var maxy = -999
+	for cell in cells:
+		if cell.x < minx:
+			minx = cell.x 
+		if cell.x > maxx:
+			maxx = cell.x 
+		if cell.y < miny:
+			miny = cell.y 
+		if cell.y > maxy: 
+			maxy = cell.y  
+	
+	return Vector2(maxx - minx, maxy - miny)
 		
 func _input(event):
 	if !started and event is InputEventKey and event.is_action_pressed('ui_accept'):
@@ -86,14 +106,13 @@ func start_game():
 	started = true
 	$Tutorial/AnimationPlayer.play_backwards("WaitForStart")
 	Music.stop()
-	generate_floor_plan()
 	if !DEBUG and (config.auto or config.freestyle):
 		next_beat_at = beat_duration
 		music.play()
 		set_process(true)
 
 func restart_level():
-	get_tree().change_scene("res://Scenes/Game.tscn")
+	LevelSwitcher.restart_level()
 
 func _process(delta):	
 	if paused or !started:
@@ -164,16 +183,26 @@ func get_nearest_target_path_from(start_pos):
 			result = path
 	return result
 
+func add_line(start, end):
+	print("ADDING LINE")
+	var line = Line2D.new()
+	add_child(line)
+	line.points.append(start)
+	line.points.append(end)
+
 func generate_floor_plan():
+	print("GENERATING PLAN")
 	if !floor_plan:
 		floor_plan = AStar.new()
 	else:
 		floor_plan.clear()
 
+	print("adding nodes.. map_size: ", map_size)
   # Add nodes
 	for x in range(map_size.x + 1):
 		for y in range(map_size.y + 1):
 			if accessible_cell(get_cell_xy(x, y)):
+				print("ADDING POINT - " + str(x) + " x " + str(y))
 				floor_plan.add_point(get_cell_id(x, y), Vector3(x, y, 0))
 
   # Add connections
@@ -183,12 +212,16 @@ func generate_floor_plan():
 			if floor_plan.has_point(cell_id):
 				# get neighbours
 				if accessible_cell(get_cell_xy(x + 1, y)):
+					add_line(Vector2(x,y), Vector2(x+1, y))
 					floor_plan.connect_points(cell_id, get_cell_id(x+1, y))
 				if accessible_cell(get_cell_xy(x, y + 1)):
+					add_line(Vector2(x,y), Vector2(x, y + 1))
 					floor_plan.connect_points(cell_id, get_cell_id(x, y + 1))
 				if accessible_cell(get_cell_xy(x - 1, y)):
+					add_line(Vector2(x,y), Vector2(x - 1, y))
 					floor_plan.connect_points(cell_id, get_cell_id(x-1, y))
 				if accessible_cell(get_cell_xy(x, y - 1)):
+					add_line(Vector2(x,y), Vector2(x, y - 1))
 					floor_plan.connect_points(cell_id, get_cell_id(x, y - 1))
 
 func get_nearest_path(from, to):
