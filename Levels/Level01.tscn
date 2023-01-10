@@ -496,15 +496,15 @@ with_tutorial = true
 
 [node name="Bg" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0.529412 )
-position = Vector2( 334, 128 )
-scale = Vector2( 1.236, 1 )
+position = Vector2( 320, 128 )
+scale = Vector2( 1.408, 1 )
 texture = ExtResource( 13 )
 
 [node name="Vignette" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0.25098 )
 material = SubResource( 2 )
-position = Vector2( 280, 188 )
-scale = Vector2( 1.38, 1.584 )
+position = Vector2( 324, 200 )
+scale = Vector2( 1.75, 1.632 )
 texture = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]

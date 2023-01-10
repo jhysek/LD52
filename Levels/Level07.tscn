@@ -471,15 +471,15 @@ disable_blink = false
 
 [node name="Bg" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0.529412 )
-position = Vector2( 334, 128 )
-scale = Vector2( 1.236, 1 )
+position = Vector2( 347, 128 )
+scale = Vector2( 1.5, 1 )
 texture = ExtResource( 13 )
 
 [node name="Vignette" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0.25098 )
 material = SubResource( 2 )
-position = Vector2( 280, 188 )
-scale = Vector2( 1.38, 1.584 )
+position = Vector2( 300, 204.5 )
+scale = Vector2( 1.68, 1.65 )
 texture = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]

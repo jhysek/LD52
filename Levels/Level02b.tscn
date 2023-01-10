@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Assets/Brains_90.mp3" type="AudioStream" id=1]
 [ext_resource path="res://Assets/vignette.png" type="Texture" id=2]
@@ -13,6 +13,8 @@
 [ext_resource path="res://Components/Enemy/Enemy.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Assets/zombie.png" type="Texture" id=12]
 [ext_resource path="res://Assets/bg.png" type="Texture" id=13]
+[ext_resource path="res://Assets/human.png" type="Texture" id=14]
+[ext_resource path="res://Assets/arrow.png" type="Texture" id=15]
 
 [sub_resource type="CanvasItemMaterial" id=2]
 
@@ -464,6 +466,36 @@ use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 4 )
 
+[sub_resource type="Animation" id=10]
+resource_name = "FadeIn"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.2 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
 [node name="Game" type="Node2D"]
 script = ExtResource( 6 )
 bpm = "60"
@@ -471,15 +503,15 @@ disable_blink = false
 
 [node name="Bg" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0.529412 )
-position = Vector2( 337, 128 )
-scale = Vector2( 1.446, 1 )
+position = Vector2( 368.5, 128 )
+scale = Vector2( 1.593, 1 )
 texture = ExtResource( 13 )
 
 [node name="Vignette" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0.25098 )
 material = SubResource( 2 )
-position = Vector2( 298, 196.5 )
-scale = Vector2( 1.6675, 1.618 )
+position = Vector2( 335.5, 188 )
+scale = Vector2( 1.87875, 1.584 )
 texture = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -490,35 +522,31 @@ current = true
 tile_set = SubResource( 1 )
 cell_size = Vector2( 64, 56 )
 format = 1
-tile_data = PoolIntArray( 0, 15, 0, 1, 14, 0, 2, 15, 0, 7, 15, 0, 8, 14, 0, 9, 15, 0, 131071, 15, 0, 65536, 12, 0, 65537, 15, 0, 65538, 12, 0, 65539, 15, 0, 65542, 15, 0, 65543, 12, 0, 65544, 15, 0, 65545, 12, 0, 65546, 15, 0, 196607, 14, 0, 131072, 15, 0, 131073, 14, 0, 131074, 15, 0, 131075, 14, 0, 131076, 15, 0, 131077, 15, 0, 131078, 14, 0, 131079, 15, 0, 131080, 14, 0, 131081, 15, 0, 131082, 14, 0, 262143, 15, 0, 196608, 12, 0, 196609, 15, 0, 196610, 12, 0, 196611, 15, 0, 196614, 15, 0, 196615, 12, 0, 196616, 15, 0, 196617, 12, 0, 196618, 15, 0, 262144, 15, 0, 262145, 14, 0, 262146, 15, 0, 262151, 15, 0, 262152, 14, 0, 262153, 15, 0 )
+tile_data = PoolIntArray( 7, 13, 0, 65539, 14, 0, 65540, 12, 0, 65541, 12, 0, 65542, 12, 0, 65543, 12, 0, 131075, 12, 0, 131076, 12, 0, 131078, 12, 0, 131079, 13, 0, 196611, 14, 0, 196612, 12, 0, 196614, 12, 0, 196615, 12, 0, 262147, 12, 0, 262148, 12, 0, 262149, 12, 0, 262150, 12, 0, 262151, 13, 0, 327683, 14, 0 )
 
 [node name="Powerups" type="Node2D" parent="."]
 
 [node name="Humans" type="Node2D" parent="."]
 
 [node name="Human" parent="Humans" instance=ExtResource( 11 )]
-position = Vector2( 541, 250 )
-TURN_AFTER = 0
-
-[node name="Human2" parent="Humans" instance=ExtResource( 11 )]
-position = Vector2( 30, 21 )
+position = Vector2( 422, 134 )
 TURN_AFTER = 0
 type = 2
 
 [node name="Zombies" type="Node2D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource( 9 )]
-position = Vector2( 285, 144 )
+position = Vector2( 214, 139 )
 
 [node name="BrainIndicator" parent="." instance=ExtResource( 7 )]
 position = Vector2( -160, -144 )
 
 [node name="PauseMenu" type="Panel" parent="."]
 visible = false
-margin_left = 133.0
-margin_top = 282.0
-margin_right = 493.0
-margin_bottom = 482.0
+margin_left = 172.0
+margin_top = 304.0
+margin_right = 532.0
+margin_bottom = 504.0
 
 [node name="Title" type="Label" parent="PauseMenu"]
 margin_left = 120.0
@@ -540,10 +568,10 @@ R    to restart level"
 
 [node name="LevelFailed" type="Panel" parent="."]
 visible = false
-margin_left = 104.0
-margin_top = 212.0
-margin_right = 544.0
-margin_bottom = 516.0
+margin_left = 142.0
+margin_top = 243.0
+margin_right = 582.0
+margin_bottom = 547.0
 
 [node name="Zombie" type="Sprite" parent="LevelFailed"]
 position = Vector2( 22.5492, 192 )
@@ -576,10 +604,10 @@ text = " give up"
 
 [node name="LevelFinished" type="Panel" parent="."]
 visible = false
-margin_left = 105.0
-margin_top = 226.0
-margin_right = 521.0
-margin_bottom = 474.0
+margin_left = 153.0
+margin_top = 272.0
+margin_right = 569.0
+margin_bottom = 520.0
 
 [node name="Zombie" type="Sprite" parent="LevelFinished"]
 position = Vector2( 32, 160 )
@@ -659,6 +687,56 @@ custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = SubResource( 8 )
 text = "press SPACE to start"
 
+[node name="Hint" type="Node2D" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 336, 71 )
+
+[node name="Human" type="Sprite" parent="Hint"]
+position = Vector2( 14, -8 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 14 )
+
+[node name="Zombie" type="Sprite" parent="Hint"]
+position = Vector2( 90, -7 )
+scale = Vector2( -0.2, 0.2 )
+texture = ExtResource( 12 )
+
+[node name="Arrow" type="Sprite" parent="Hint"]
+position = Vector2( 17, 52 )
+rotation = 1.5708
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 15 )
+
+[node name="Arrow3" type="Sprite" parent="Hint"]
+position = Vector2( 140, 12 )
+rotation = 3.12969
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 15 )
+
+[node name="Arrow2" type="Sprite" parent="Hint"]
+modulate = Color( 1, 1, 1, 0.741176 )
+position = Vector2( -33, 12 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 15 )
+
+[node name="L03" type="Label" parent="Hint"]
+margin_left = -18.0
+margin_top = -94.0
+margin_right = 305.0
+margin_bottom = -29.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 6 )
+text = "HINT:"
+
+[node name="HintTimer" type="Timer" parent="Hint"]
+wait_time = 45.0
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Hint"]
+anims/FadeIn = SubResource( 10 )
+anims/RESET = SubResource( 11 )
+
 [connection signal="pressed" from="LevelFailed/Restart" to="." method="restart_level"]
 [connection signal="pressed" from="LevelFailed/Quit" to="." method="_on_Quit_pressed"]
 [connection signal="pressed" from="LevelFinished/Start" to="." method="_on_Start_pressed"]
@@ -667,3 +745,4 @@ text = "press SPACE to start"
 [connection signal="finished" from="Music/bpm90" to="." method="_on_bpm90_finished"]
 [connection signal="finished" from="Music/bpm120" to="." method="_on_bpm120_finished"]
 [connection signal="animation_finished" from="Tutorial/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="timeout" from="Hint/HintTimer" to="." method="_on_HintTimer_timeout"]

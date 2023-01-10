@@ -90,14 +90,14 @@ script = ExtResource( 2 )
 [node name="Panel" type="Panel" parent="."]
 margin_left = -886.0
 margin_top = -516.0
-margin_right = 900.0
+margin_right = 992.0
 margin_bottom = 506.0
 custom_styles/panel = SubResource( 6 )
 
 [node name="Bg" type="Sprite" parent="."]
 modulate = Color( 0.831373, 1, 0.764706, 0.317647 )
-position = Vector2( 3.99989, 0 )
-scale = Vector2( 1.72, 1 )
+position = Vector2( 60, 0 )
+scale = Vector2( 1.832, 1 )
 texture = ExtResource( 6 )
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -118,13 +118,13 @@ custom_fonts/font = SubResource( 1 )
 text = "Brains"
 
 [node name="Disclaimer" type="Label" parent="."]
-margin_left = 24.0
-margin_top = 330.0
-margin_right = 482.0
-margin_bottom = 354.0
+margin_left = -32.0
+margin_top = 336.0
+margin_right = 486.0
+margin_bottom = 360.0
 custom_colors/font_color = Color( 0.356863, 0.356863, 0.356863, 1 )
 custom_fonts/font = SubResource( 2 )
-text = "Made in 48h for Ludum Dare Compo by Jiri Hysek"
+text = "post-jam version 1.0.1"
 align = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -143,7 +143,7 @@ margin_left = -64.0
 margin_top = 0.0
 margin_right = 320.0
 margin_bottom = 69.0
-text = "How Human works"
+text = "How Humans work"
 
 [node name="Light2D" type="Light2D" parent="."]
 position = Vector2( -72, -336 )

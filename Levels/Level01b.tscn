@@ -494,15 +494,15 @@ script = ExtResource( 6 )
 
 [node name="Bg" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0.529412 )
-position = Vector2( 334, 128 )
-scale = Vector2( 1.236, 1 )
+position = Vector2( 316, 150 )
+scale = Vector2( 1.496, 1.044 )
 texture = ExtResource( 13 )
 
 [node name="Vignette" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0.25098 )
 material = SubResource( 2 )
-position = Vector2( 280, 188 )
-scale = Vector2( 1.38, 1.584 )
+position = Vector2( 300, 188 )
+scale = Vector2( 1.71, 1.584 )
 texture = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -513,7 +513,7 @@ current = true
 tile_set = SubResource( 1 )
 cell_size = Vector2( 64, 56 )
 format = 1
-tile_data = PoolIntArray( 65536, 14, 0, 65537, 15, 0, 65538, 14, 0, 65539, 15, 0, 65540, 14, 0, 65541, 15, 0, 65542, 14, 0, 65543, 15, 0, 65544, 14, 0, 131072, 15, 0, 131073, 15, 0, 131075, 15, 0, 131077, 15, 0, 131079, 15, 0, 131080, 15, 0, 196608, 14, 0, 196609, 15, 0, 196610, 14, 0, 196611, 15, 0, 196612, 14, 0, 196613, 15, 0, 196614, 14, 0, 196615, 15, 0, 196616, 14, 0 )
+tile_data = PoolIntArray( 65536, 14, 0, 65537, 12, 0, 65538, 14, 0, 65539, 12, 0, 65540, 14, 0, 65541, 12, 0, 65542, 14, 0, 65543, 12, 0, 65544, 14, 0, 131072, 15, 0, 131073, 15, 0, 131075, 15, 0, 131077, 15, 0, 131079, 15, 0, 131080, 15, 0, 196608, 14, 0, 196609, 12, 0, 196610, 14, 0, 196611, 12, 0, 196612, 14, 0, 196613, 12, 0, 196614, 14, 0, 196615, 12, 0, 196616, 14, 0 )
 
 [node name="Powerups" type="Node2D" parent="."]
 
@@ -683,11 +683,11 @@ stream = ExtResource( 14 )
 [node name="SpaceToStart" type="Label" parent="."]
 margin_left = 88.0
 margin_top = -96.0
-margin_right = 478.0
+margin_right = 523.0
 margin_bottom = -58.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = SubResource( 8 )
-text = "press SPACE to start"
+text = "press any key to start"
 
 [connection signal="animation_finished" from="Tutorial/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="pressed" from="LevelFailed/Restart" to="." method="restart_level"]

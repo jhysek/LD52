@@ -1,6 +1,13 @@
 extends Node2D
 
-export var DIRECTIONS = [Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT, Vector2.UP]
+#export var DIRECTIONS = [Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT, Vector2.UP]
+const DIRECTIONS = {
+	Vector2.RIGHT: [Vector2.DOWN, Vector2.UP, Vector2.LEFT, Vector2(0,0)], 
+	Vector2.LEFT: [Vector2.UP, Vector2.DOWN, Vector2.RIGHT, Vector2(0,0)], 
+	Vector2.DOWN: [Vector2.LEFT, Vector2.RIGHT, Vector2.UP, Vector2(0,0)], 
+	Vector2.UP: [Vector2.RIGHT, Vector2.LEFT, Vector2.DOWN, Vector2(0,0)],
+	Vector2(0,0): [Vector2.RIGHT, Vector2.DOWN, Vector2.UP, Vector2.LEFT, Vector2(0,0)]
+}
 export var DIRECTION_IDX = 0
 export var TURN_AFTER = 3
 export var HAS_FOV = false
@@ -8,7 +15,7 @@ export var ZOMBIFY_COOLDOWN = 5
 
 onready var game = get_node("/root/Game")
 var map_pos = Vector2(0,0)
-var direction = Vector2.RIGHT
+export var direction = Vector2.RIGHT
 var dead = false
 var changing_direction = false
 var step_counter = 0
@@ -39,7 +46,8 @@ var FOV = [
 ]
 
 func _ready():	
-	set_direction(DIRECTIONS[DIRECTION_IDX])
+	#set_direction(DIRECTIONS[DIRECTION_IDX])
+	set_direction(direction)
 	jump_to_map_pos(get_map_pos() - Vector2(0,0), 0.1)
 	if !HAS_FOV:
 		$FOV.hide()
@@ -51,7 +59,7 @@ func _ready():
 func jump():
 	if dead: 
 		return
-	print("MAP POS: " + str(map_pos))
+
 	if zombify_timeout > 0:
 		zombify_timeout -= 1
 		return
@@ -88,6 +96,13 @@ func set_direction(new_direction):
 	if direction != new_direction:
 		changing_direction = true
 	direction = new_direction
+	
+	if direction.x < 0:
+		$Visual.scale.x = -0.5
+		$VisualZombie.scale.x = -0.5
+	if direction.x > 0:
+		$Visual.scale.x = 0.5
+		$VisualZombie.scale.x = 0.5
 			
 	rotate_according_direction(indicator)
 
@@ -103,13 +118,6 @@ func jump_to_map_pos(new_map_pos, duration = 0.3):
 		
 	if mode == Modes.human and HAS_FOV:
 		filter_fov(new_map_pos)
-	
-	if new_map_pos.x < map_pos.x:
-		$Visual.scale.x = -0.5
-		$VisualZombie.scale.x = -0.5
-	if new_map_pos.x > map_pos.x:
-		$Visual.scale.x = 0.5
-		$VisualZombie.scale.x = 0.5
 		
 	var new_pos = to_world_pos(new_map_pos)
 	$Tween.interpolate_property(self, 'position', position, new_pos, duration, Tween.TRANS_EXPO, Tween.EASE_OUT)
@@ -129,7 +137,7 @@ func jump_to_map_pos(new_map_pos, duration = 0.3):
 			next_direction()
 	next_safe_direction()
 	
-func next_safe_direction():
+func next_safe_direction_orig():
 	var iterations = 0
 	while !game.is_floor(map_pos + direction) or \
 		 (mode == Modes.human && (game.is_occupied_by_player(map_pos + direction) or \
@@ -137,11 +145,24 @@ func next_safe_direction():
 		 game.is_occupied_by_zombie(map_pos + direction, self):
 		
 		iterations += 1
-		if iterations > DIRECTIONS.size():
+		if iterations > DIRECTIONS.size() + 1:
 			direction = Vector2(0,0)
 			break
 		next_direction()
 		
+func next_safe_direction():
+	var choices = DIRECTIONS[direction]
+	var choice_idx = 0
+	
+	while  !game.is_floor(map_pos + direction) or \
+		 (mode == Modes.human && (game.is_occupied_by_player(map_pos + direction) or \
+		 game.is_occupied_by_player(map_pos + direction * 2))) or \
+		 game.is_occupied_by_zombie(map_pos + direction, self):
+		
+		set_direction(choices[choice_idx])		
+		choice_idx += 1
+
+
 func next_direction():
 	DIRECTION_IDX += 1
 	set_direction(DIRECTIONS[DIRECTION_IDX % DIRECTIONS.size()])

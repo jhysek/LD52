@@ -76,14 +76,12 @@ func get_map_size(cells):
 		if cell.y > maxy: 
 			maxy = cell.y  
 	
-	print("MINX: " + str(minx))
-	print("MINY: " + str(miny))
-	print("MAP SIZE: " + str(Vector2(maxx - minx + 1, maxy - miny + 1)))
 	return Vector2(maxx - minx + 1, maxy - miny + 1)
 		
 func _input(event):
-	if !started and event is InputEventKey and event.is_action_pressed('ui_accept'):
-		start_game()
+	if !started and event is InputEventKey and event.pressed:
+		if !with_tutorial:
+			start_game()
 		
 	if started and event is InputEventKey and event.is_action_pressed('ui_cancel'):
 		if !paused:
@@ -211,7 +209,6 @@ func generate_floor_plan():
 			var x = minx + xx
 			var y = miny + yy
 			var cell_id = get_cell_id(x, y)
-			print("CELL: " + str(x) + "x" + str(y))
 			if floor_plan.has_point(cell_id):
 				# get neighbours
 				if accessible_cell(get_cell_xy(x + 1, y)):
@@ -335,3 +332,7 @@ func _on_FinishTimeout_timeout():
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Tutorial":
 		start_game()
+
+
+func _on_HintTimer_timeout():
+	$Hint/AnimationPlayer.play("FadeIn")

@@ -115,6 +115,7 @@ position = Vector2( 112, -80 )
 texture = ExtResource( 8 )
 
 [node name="Sprite5" type="Sprite" parent="Human1"]
+modulate = Color( 1, 1, 1, 0.384314 )
 position = Vector2( -152, -80 )
 texture = ExtResource( 8 )
 
@@ -170,6 +171,11 @@ text = "3. Zombie scares humans
 position = Vector2( 120, -136 )
 scale = Vector2( -0.4, 0.4 )
 texture = ExtResource( 9 )
+
+[node name="Sprite6" type="Sprite" parent="Human2"]
+modulate = Color( 1, 1, 1, 0.180392 )
+position = Vector2( -144, -80 )
+texture = ExtResource( 8 )
 
 [node name="Human3" type="Sprite" parent="."]
 position = Vector2( 216, 360 )

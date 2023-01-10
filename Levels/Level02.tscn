@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Assets/Brains_90.mp3" type="AudioStream" id=1]
 [ext_resource path="res://Assets/vignette.png" type="Texture" id=2]
@@ -13,6 +13,8 @@
 [ext_resource path="res://Components/Enemy/Enemy.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Assets/zombie.png" type="Texture" id=12]
 [ext_resource path="res://Assets/bg.png" type="Texture" id=13]
+[ext_resource path="res://Assets/human.png" type="Texture" id=14]
+[ext_resource path="res://Assets/arrow.png" type="Texture" id=15]
 
 [sub_resource type="CanvasItemMaterial" id=2]
 
@@ -464,6 +466,36 @@ use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 4 )
 
+[sub_resource type="Animation" id=10]
+resource_name = "FadeIn"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.2 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
 [node name="Game" type="Node2D"]
 script = ExtResource( 6 )
 bpm = "60"
@@ -471,15 +503,15 @@ disable_blink = false
 
 [node name="Bg" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0.529412 )
-position = Vector2( 334, 128 )
-scale = Vector2( 1.236, 1 )
+position = Vector2( 368.5, 128 )
+scale = Vector2( 1.593, 1 )
 texture = ExtResource( 13 )
 
 [node name="Vignette" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0.25098 )
 material = SubResource( 2 )
-position = Vector2( 280, 188 )
-scale = Vector2( 1.38, 1.584 )
+position = Vector2( 335.5, 188 )
+scale = Vector2( 1.87875, 1.584 )
 texture = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -490,7 +522,7 @@ current = true
 tile_set = SubResource( 1 )
 cell_size = Vector2( 64, 56 )
 format = 1
-tile_data = PoolIntArray( 65539, 0, 0, 65540, 0, 0, 65541, 1, 0, 65542, 0, 0, 65543, 0, 0, 131075, 0, 0, 131076, 0, 0, 131077, 1, 0, 131078, 0, 0, 131079, 0, 0, 196611, 0, 0, 196612, 2, 0, 196613, 1, 0, 196614, 2, 0, 196615, 0, 0, 262149, 2, 0 )
+tile_data = PoolIntArray( 65539, 0, 0, 65540, 6, 0, 65541, 0, 0, 65542, 6, 0, 65543, 0, 0, 131075, 6, 0, 131076, 0, 0, 131077, 6, 0, 131078, 0, 0, 131079, 6, 0, 196611, 0, 0, 196612, 6, 0, 196613, 0, 0, 196614, 6, 0, 196615, 0, 0, 262149, 3, 0 )
 
 [node name="Powerups" type="Node2D" parent="."]
 
@@ -655,6 +687,56 @@ custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = SubResource( 8 )
 text = "press SPACE to start"
 
+[node name="Hint" type="Node2D" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 336, 71 )
+
+[node name="Human" type="Sprite" parent="Hint"]
+position = Vector2( 14, -8 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 14 )
+
+[node name="Zombie" type="Sprite" parent="Hint"]
+position = Vector2( 90, -7 )
+scale = Vector2( -0.2, 0.2 )
+texture = ExtResource( 12 )
+
+[node name="Arrow" type="Sprite" parent="Hint"]
+position = Vector2( 17, 52 )
+rotation = 1.5708
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 15 )
+
+[node name="Arrow3" type="Sprite" parent="Hint"]
+position = Vector2( 140, 12 )
+rotation = 3.12969
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 15 )
+
+[node name="Arrow2" type="Sprite" parent="Hint"]
+modulate = Color( 1, 1, 1, 0.741176 )
+position = Vector2( -33, 12 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 15 )
+
+[node name="L03" type="Label" parent="Hint"]
+margin_left = -18.0
+margin_top = -94.0
+margin_right = 305.0
+margin_bottom = -29.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 6 )
+text = "HINT:"
+
+[node name="HintTimer" type="Timer" parent="Hint"]
+wait_time = 45.0
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Hint"]
+anims/FadeIn = SubResource( 10 )
+anims/RESET = SubResource( 11 )
+
 [connection signal="pressed" from="LevelFailed/Restart" to="." method="restart_level"]
 [connection signal="pressed" from="LevelFailed/Quit" to="." method="_on_Quit_pressed"]
 [connection signal="pressed" from="LevelFinished/Start" to="." method="_on_Start_pressed"]
@@ -663,3 +745,4 @@ text = "press SPACE to start"
 [connection signal="finished" from="Music/bpm90" to="." method="_on_bpm90_finished"]
 [connection signal="finished" from="Music/bpm120" to="." method="_on_bpm120_finished"]
 [connection signal="animation_finished" from="Tutorial/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="timeout" from="Hint/HintTimer" to="." method="_on_HintTimer_timeout"]
